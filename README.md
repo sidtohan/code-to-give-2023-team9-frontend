@@ -9,4 +9,4 @@ Website: https://breadsbangalore.org/
 
 - So far, all data collected after training sessions(such as how many people are enrolled in counselling programs, where are they from) is collected manually using pen and paper or using spreadsheets.
 
-In order to help them with digitalization of data collection, our team has decided to create a web application to assist BREADS in their noble mission.
+In order to assist BREADS in their noble mission, our team has decided to make a web app that can help in digitalizing the process of data collection.

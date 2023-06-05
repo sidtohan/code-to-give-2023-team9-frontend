@@ -8,7 +8,9 @@ export default function ChatMessageHolder({ messages }) {
         return (
           <Fragment key={i}>
             <QuestionMessage message={message.question} />
-            <AnswerMessage message={message.answer} />
+            {message.answers.map((answer, idx) => (
+              <AnswerMessage key={`o${idx}`} message={answer} />
+            ))}
           </Fragment>
         );
       })}

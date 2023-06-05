@@ -6,7 +6,10 @@ import ChatForm from "../components/ChatForm";
 
 export default function Chat() {
   const [messages, setMessages] = useState([
-    { question: "Hello! Your responses will appear here.", answer: "Alright." },
+    {
+      question: "Hello! Your responses will appear here.",
+      answers: ["Alright"],
+    },
   ]);
   const question = {
     question: "What is your name?",
@@ -17,7 +20,11 @@ export default function Chat() {
     <div className="chat">
       <ChatHeader />
       <ChatMessageHolder messages={messages} />
-      <ChatForm question={question} />
+      <ChatForm
+        question={question}
+        messages={messages}
+        setMessages={setMessages}
+      />
     </div>
   );
 }

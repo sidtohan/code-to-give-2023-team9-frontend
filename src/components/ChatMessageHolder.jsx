@@ -1,10 +1,7 @@
 import "../css/ChatMessageHolder.css";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment } from "react";
 import { AnswerMessage, QuestionMessage } from "./ChatMessage";
-export default function ChatMessageHolder() {
-  const [messages, setMessages] = useState([
-    { question: "Hello! Your responses will appear here.", answer: "Alright." },
-  ]);
+export default function ChatMessageHolder({ messages }) {
   return (
     <section className="chat-message-holder">
       {messages.map((message, i) => {

@@ -1,5 +1,5 @@
 import "../css/Chat.css";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ChatHeader from "../components/ChatHeader";
 import ChatMessageHolder from "../components/ChatMessageHolder";
 import ChatForm from "../components/ChatForm";
@@ -11,19 +11,24 @@ export default function Chat() {
       answers: ["Alright"],
     },
   ]);
-  const question = {
+  const [question, setQuestion] = useState({
     question: "What is your name?",
     type: "multi",
     options: ["Hello", "Bye", "Go Away"],
-  };
+  });
+  const messageHolderRef = useRef();
+  useEffect(() => {
+    messageHolderRef.current.scrollTop = messageHolderRef.current.scrollHeight;
+  }, [messages]);
   return (
     <div className="chat">
       <ChatHeader />
-      <ChatMessageHolder messages={messages} />
+      <ChatMessageHolder messages={messages} ref={messageHolderRef} />
       <ChatForm
         question={question}
         messages={messages}
         setMessages={setMessages}
+        messageHolderRef={messageHolderRef}
       />
     </div>
   );

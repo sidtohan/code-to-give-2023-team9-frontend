@@ -6,13 +6,19 @@
   'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
   sans-serif;
   --font-small: 18px;
-  --font-medium: 24px;
-  --font-large: 30px;
+  --font-medium: 22px;
+  --font-large: 26px;
 }
 body {
   margin: 0;
+  height: 100vh;
   font-family: var(--font-fam);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--secondary);
+}
+#root{
+  margin: 0;
+  height:100vh;
 }
 

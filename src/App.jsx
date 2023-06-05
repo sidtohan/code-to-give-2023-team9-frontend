@@ -1,10 +1,10 @@
 import './css/App.css';
-import ChatHeader from './components/ChatHeader';
+import Chat from './pages/Chat';
 
 function App() {
   return (
-    <div>
-      <ChatHeader />
+    <div className="app">
+      <Chat />
     </div>
   );
 }

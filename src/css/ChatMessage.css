@@ -6,7 +6,7 @@
 }
 .chat-message-content{
     border-radius: 3rem;
-    padding: 0.75rem 1rem;
+    padding: 0.75rem 1.5rem;
     font-weight: 600;
     width: 60%;
     font-size: var(--font-small);

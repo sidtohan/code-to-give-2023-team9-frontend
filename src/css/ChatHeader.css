@@ -1,5 +1,7 @@
 .chat-header{
     color: var(--secondary);
+    position: fixed;
+    width: 100%;
     z-index: 0;
     display: flex;
     flex-direction: row;
@@ -7,16 +9,18 @@
     align-items: center;
     background-color: var(--primary);
     padding: 1rem 2rem;
+    height: 5rem;
 }
 .chat-header-logo{
     display: flex;
     justify-content: center;
     align-items:center;
-    height: 5rem;
-    width: 5rem;
+    height: 100%;
+    width: auto;
     aspect-ratio: 1;
     background-color: #7d1f1f;
     border-radius: 50%;
+    max-height: 4rem;
 }
 .chat-header-logo > img{
     display: block;

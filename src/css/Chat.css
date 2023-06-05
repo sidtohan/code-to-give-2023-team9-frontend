@@ -1,3 +1,6 @@
 .chat{
     height: 60vh;
 }
+*{
+    box-sizing: border-box;
+}

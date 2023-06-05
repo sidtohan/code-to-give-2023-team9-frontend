@@ -1,17 +1,19 @@
 .chat-form{
     box-sizing: border-box;
     width: 100%;
+    height: 38vh;
     padding: 0 1rem;
     gap: 5%;
     position: fixed;
     bottom: 0;
     display: flex;
     align-items: center;
+    background-color: var(--secondary);
 }
 .chat-form-bot{
     position: relative;
-    height: 50vh;
-    width: 50%;
+    width: 40%;
+    height: 100%;
 }
 .chat-form-bot > img{
     position: absolute;
@@ -22,18 +24,20 @@
     max-height: 100%;
 }
 .chat-form > form{
-    align-self: flex-start;
-    padding-top: calc(5rem - 5vw);
-    width: 45%;
+    align-self: center;
+    font-size: var(--font-small);
+    width: 50%;
+    height: fit-content;
     text-align: center;
 }
 .form-heading{
     font-weight: 600;
     color: var(--primary);
     margin: 0;
+    font-size: var(--font-medium);
 }
 .option-list{
-    align-self: flex-start;
+    align-self: center;
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -42,11 +46,11 @@
 .chat-option{
     background-color: var(--primary);
     padding: 0.6rem 1rem;
-    font-size: var(--font-small);
     color: var(--secondary);
     font-weight: 500;
     border-radius: 3rem;
     border: 1px solid var(--primary);
+    overflow: scroll;
 }
 .chat-option.invert{
     background-color: var(--secondary);
@@ -66,6 +70,29 @@
 .chat-wave > img{
     position: absolute;
     display: block;
-    bottom: 0;
-    right: 0;
+    bottom: -150%;
+    left: 0;
+}
+.form-button{
+    position: relative;
+    font-family: var(--font-fam);
+    background-color: var(--secondary);
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    font-size: var(--font-small);
+    padding: 1rem;
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+    transition: 0.3s ease-in-out;
+}
+.form-button > img{
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(50%,50%);
+}
+.form-button:disabled{
+    opacity: 0.7;
 }

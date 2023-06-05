@@ -1,6 +1,7 @@
 import "../css/ChatForm.css";
 import { useRef, useState } from "react";
-import chatWave from "../assets/chatWave.svg";
+import chatWave from "../assets/curve.png";
+import tick from "../assets/tick.svg";
 import ChatFormBot from "./ChatFormBot";
 
 function ChatOption({ option, index, markedAnswers, setMarkedAnswers }) {
@@ -63,8 +64,12 @@ export default function ChatForm({ question, messages, setMessages }) {
             );
           })}
         </div>
-        <button className="form-button" onClick={submitForm}>
-          Next
+        <button
+          className="form-button"
+          onClick={submitForm}
+          disabled={markedAnswers.length == 0}
+        >
+          <img src={tick} alt="Submit" />
         </button>
       </form>
       <div className="chat-wave">

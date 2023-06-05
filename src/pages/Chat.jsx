@@ -14,7 +14,7 @@ export default function Chat() {
   const [question, setQuestion] = useState({
     question: "What is your name?",
     type: "multi",
-    options: ["Hello", "Bye", "Go Away"],
+    options: ["Siddhant", "Tohan"],
   });
   const messageHolderRef = useRef();
   useEffect(() => {

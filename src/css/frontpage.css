@@ -1,103 +1,29 @@
-
 body {
     background-color: #faf9f1;
+    background-image: url("../assets/wave.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-y: -20%;
     height: 100%;
     margin: 0;
     padding: 0;
     overflow: hidden;
 }
 
+/* Navbar  Starts*/
+
 .navbar {
     display: flex;
     justify-content: space-between;
-    /* align-items: center; */
-    /* padding: 0.5em; */
 }
 
-.burger-bar {
-    height: 2em;
-    padding-left: 0.5em;
-}
-
-.breads-logo {
-    padding: 0.7em;
-
-    height: 3em;
-    aspect-ratio: auto;
-}
-
-.chatbot-container {
+.menu {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 3em;
-    /* width: 100%; */
+    z-index: 100;
 }
 
-.bot-img-bg {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #661515;
-    border-radius: 50%;
-    height: 8.5em;
-    width: 8.5em;
-}
-
-
-.chat-button{
-    border-radius: 15px;
-    background-color: #00000000;
-    border: 1px solid;
-    padding: 0.5em 1em;
-}
-
-.chat-button:hover{
-    background-color: #661515;
-    transition: 0.5s;
-    color: white;
-}
-
-.description-container {
-    /* display: flex; */
-    background-color: #661515;
-    /* background: "wave.svg"; */
-    /* background-image: ; */
-
-    height: 100%;
-    /* position:absolute; */
-    /* align-items: center; */
-    /* justify-content: center; */
-    max-height: 28em;
-    width: stretch;
-    padding: 1em;
-}
-
-.description {
-    color: white;
-    align-self: center;
-    text-align: center;
-    font-size: 1em;
-    
-}
-
-.container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    /* align-items:space-around; */
-    /* background-color: aqua; */
-    position: absolute;
-    height: 100%;
-    width: 100%;
-}
-
-.bot-intro {
-    text-align: center;
-}
-
-.hamburger-menu {
+.hamburger-icon {
     width: 35px;
     height: 30px;
     padding: 1.8em;
@@ -107,8 +33,9 @@ body {
     position: absolute;
 }
 
-.bar {
-    height: 5px;
+
+.hamburger-icon-bar {
+    height: 4px;
     width: 100%;
     background-color: #000000;
     display: block;
@@ -119,20 +46,26 @@ body {
 #bar1 {
     transform: translateY(-4px);
 }
+
 #bar3 {
     transform: translateY(4px);
 }
 
-nav li {
-    list-style: none;
-    padding: 0.2em 0;
+.icon-transform #bar1 {
+    transform: translateY(4px) rotate(-45deg);
 }
 
-nav li a{
-    text-decoration: none;
-    color: #ffffff;
+.icon-transform #bar2 {
+    opacity: 0;
 }
 
+.icon-transform #bar3 {
+    transform: translateY(-4px) rotate(45deg);
+}
+
+#menu-content {
+    position: absolute;
+}
 
 nav ul {
     padding: 0;
@@ -140,51 +73,262 @@ nav ul {
     transition: 1s ease;
     display: none;
 }
-
-.icon #bar1 {
-    transform: translateY(4px) rotate(-45deg);
+.navbar li {
+    list-style: none;
+    padding: 0.2em 0;
 }
 
-.icon #bar2{
-    opacity: 0;
-    /* transition: none; */
+.navbar li a {
+    text-decoration: none;
+    color: #ffffff;
 }
 
-.icon #bar3 {
-    transform: translateY(-6px) rotate(45deg);
+
+.breads-logo {
+    padding: 0.7em;
+    height: 3em;
+    aspect-ratio: auto;
 }
 
-.change {
+
+/* Navbar Ends */
+
+/* Body Starts */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.chatbot-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 3em;
+}
+
+.bot-img-bg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #661515;
+    border-radius: 50%;
+    aspect-ratio: 1;
+    width: 50%;
+}
+
+.bot-img {
+    height: 75%;
+    width: 75%;
+}
+
+.bot-intro {
+    text-align: center;
+    font-size: 115%;
+}
+
+.chat-button {
+    border-radius: 15px;
+    background-color: #00000000;
+    border: 1px solid #661515;
+    padding: 0.5em 1em;
+    font-size: 110%;
+    color: #661515;
+}
+
+.chat-button:hover {
+    background-color: #661515;
+    transition: 0.5s;
+    color: white;
+}
+
+.description-container {
+    /* background-color: #661515; */
+    height: 100%;
+    max-height: 38%;
+    padding: 1em;
+    padding-top: 0;
+}
+
+.description {
+    color: white;
+    background-color: #661515;
+    align-self: center;
+    text-align: center;
+}
+
+@media (orientation:landscape) {
+    body{
+        overflow: auto;
+    }
+    .bot-img-bg{
+        width: 20%;
+    }
+    .bot-intro{
+        font-size: 110%;
+    }
+    .chat-button{
+        font-size: 105%;
+    }
+    .description-container{
+        max-height: 50%;
+    }
+    .description{
+        font-size: 190%;
+        display: flex;
+    }
+    .description-container{
+        max-height: 45%;
+        background-color: #661515;
+    }
+}
+
+
+
+@media (min-height:1000px) {
+    .bot-intro{
+        font-size: 190%;
+    }
+    .chat-button{
+        font-size: 185%;
+    }
+    .description-container{
+        max-height: 50%;
+    }
+    .description{
+        font-size: 190%;
+        display: flex;
+    }
+}
+@media (min-height:1100px) {
+    .bot-intro{
+        font-size: 200%;
+    }
+    .chat-button{
+        font-size: 195%;
+    }
+    .description-container{
+        max-height: 36%;
+    }
+    .description{
+        font-size: 215%;
+        display: flex;
+    }
+    body {
+        background-position-y: -25%;
+    }
+}
+
+@media (min-height:1500px) {
+    .bot-intro{
+        font-size: 230%;
+    }
+    .chat-button{
+        font-size: 225%;
+    }
+    .description-container{
+        max-height: 50%;
+    }
+    .description{
+        font-size: 240%;
+        display: flex;
+    }  
+}
+
+
+@media (max-height: 1000px) {
+    .description{
+        font-size: 145%;
+    }
+    .description-container{
+        max-height: 45%;
+    }
+    body {
+        background-position-y: -40%;
+    }
+}
+@media (max-height: 860px) {
+    .description{
+        font-size: 140%;
+    }
+}
+@media (max-height: 800px) {
+    .description{
+        font-size: 120%;
+    }
+    .description-container{
+        max-height: 45%;
+    }
+    body {
+        background-position-y: -40%;
+    }
+}
+@media (max-height: 730px) {
+    .description{
+        font-size: 105%;
+    }
+    .description-container{
+        max-height: 32%;
+    }
+    body {
+        background-position-y: -25%;
+    }
+}
+@media (max-height: 700px) {
+    .description{
+        font-size: 105%;
+    }
+    .description-container{
+        max-height: 45%;
+    }
+    body {
+        background-position-y: -35%;
+    }
+}
+@media (max-height: 660px) {
+    .description{
+        font-size: 100%;
+    }
+    .description-container{
+        max-height: 47%;
+    }
+    body {
+        background-position-y: -50%;
+    }
+}
+
+
+@media (max-height: 360px) {
+    .description{
+        font-size: 90%;
+    }
+    .description-container{
+        max-height: 45%;
+    }
+    body {
+        background-position-y: -40%;
+    }
+}
+
+
+/* Body ends */
+
+.menu-open {
     transition-property: all;
     background-color: #2f2f2f;
     color: rgba(255, 0, 0, 0);
     padding: 4em 10em 4em 1.7em;
-    /* height: 100vh; */
-    margin:0;
-    /* position: absolute; */
-    font-size: 1em;
-    top:0;
+    margin: 0;
+    font-size: 115%;
+    top: 0;
     z-index: 100;
-    /* width: 20%; */
     display: flex;
     flex-direction: column;
     transition: 1s ease;
-    /* border-radius: 30px; */
     border-radius: 0em 0em 20em 0em;
-}
-
-.menu {
-    
-    display: flex;
-    flex-direction: column;
-    z-index: 100;
-    /* position: absolute; */
-}
-
-#menu-content{
-    position: absolute;
-}
-
-ul{
-    transition: 1s ease;
 }

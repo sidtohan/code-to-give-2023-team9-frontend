@@ -12,9 +12,9 @@ export default function Chat() {
     },
   ]);
   const [question, setQuestion] = useState({
-    question: "What is your name?",
+    question: "What is frequency of drug consumption?",
     type: "multi",
-    options: ["Siddhant", "Tohan"],
+    options: ["Daily", "Monthly", "Weekly", "Yearly"],
   });
   const messageHolderRef = useRef();
   useEffect(() => {

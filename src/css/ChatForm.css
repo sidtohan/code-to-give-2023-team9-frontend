@@ -1,46 +1,49 @@
 .chat-form{
     box-sizing: border-box;
     width: 100%;
-    height: 38vh;
-    padding: 0 1rem;
-    gap: 5%;
-    position: fixed;
-    bottom: 0;
+    padding: 2vh 1rem;
+    padding-bottom: 1rem;
     display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
+    width: 100%;
     background-color: var(--secondary);
 }
 .chat-form-bot{
     position: relative;
-    width: 40%;
+    display: flex;
+    width: 100%;
     height: 100%;
 }
 .chat-form-bot > img{
-    position: absolute;
-    bottom: 5%;
     display: block;
-    width: 100%;
+    width: 50%;
     height: auto;
-    max-height: 100%;
+    max-height: 20rem;
 }
 .chat-form > form{
     align-self: center;
     font-size: var(--font-small);
-    width: 50%;
+    width: 100%;
     height: fit-content;
     text-align: center;
 }
 .form-heading{
-    font-weight: 600;
+    font-weight: 700;
+    text-align: center;
     color: var(--primary);
     margin: 0;
+    width: 100%;
     font-size: var(--font-medium);
 }
 .option-list{
-    align-self: center;
-    display: flex;
-    flex-direction: column;
+    margin: 0 auto;
+    width: 100%;
+    display: grid;
     gap: 1rem;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 1fr;
     padding: 1rem;
 }
 .chat-option{
@@ -73,26 +76,30 @@
     bottom: -150%;
     left: 0;
 }
+.form-button-holder{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .form-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: relative;
     font-family: var(--font-fam);
     background-color: var(--secondary);
     border: 1px solid var(--primary);
-    color: var(--primary);
-    font-size: var(--font-small);
     padding: 1rem;
-    height: 3rem;
-    width: 3rem;
+    height: 5rem;
+    width: 5rem;
     border-radius: 50%;
     transition: 0.3s ease-in-out;
 }
 .form-button > img{
     display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform: translate(50%,50%);
+    width: 100%;
 }
 .form-button:disabled{
-    opacity: 0.7;
+    opacity: 0.5;
 }

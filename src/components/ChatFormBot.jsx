@@ -1,8 +1,18 @@
 import chatFormBot from "../assets/botForm.svg";
-export default function ChatFormBot() {
+import arrow from "../assets/arrow.svg";
+export default function ChatFormBot({ submitForm, markedAnswers }) {
   return (
     <div className="chat-form-bot">
       <img src={chatFormBot} alt="Bot" />
+      <div className="form-button-holder">
+        <button
+          className="form-button"
+          onClick={submitForm}
+          disabled={markedAnswers.length == 0}
+        >
+          <img src={arrow} alt="Submit" />
+        </button>
+      </div>
     </div>
   );
 }

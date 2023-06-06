@@ -1,7 +1,6 @@
 import "../css/ChatForm.css";
 import { useRef, useState } from "react";
 import chatWave from "../assets/curve.png";
-import tick from "../assets/tick.svg";
 import ChatFormBot from "./ChatFormBot";
 
 function ChatOption({ option, index, markedAnswers, setMarkedAnswers }) {
@@ -33,6 +32,25 @@ function ChatOption({ option, index, markedAnswers, setMarkedAnswers }) {
     </label>
   );
 }
+const ChatFormHTML = ({ question, markedAnswers, setMarkedAnswers }) => {
+  return (
+    <form>
+      <div className="option-list">
+        {question.options.map((option, i) => {
+          return (
+            <ChatOption
+              key={i}
+              option={option}
+              index={i}
+              markedAnswers={markedAnswers}
+              setMarkedAnswers={setMarkedAnswers}
+            />
+          );
+        })}
+      </div>
+    </form>
+  );
+};
 export default function ChatForm({ question, messages, setMessages }) {
   const [markedAnswers, setMarkedAnswers] = useState([]);
   const submitForm = (e) => {
@@ -48,33 +66,14 @@ export default function ChatForm({ question, messages, setMessages }) {
   };
   return (
     <section className="chat-form">
-      <ChatFormBot />
-      <form>
-        <h2 className="form-heading">{question.question}</h2>
-        <div className="option-list">
-          {question.options.map((option, i) => {
-            return (
-              <ChatOption
-                key={i}
-                option={option}
-                index={i}
-                markedAnswers={markedAnswers}
-                setMarkedAnswers={setMarkedAnswers}
-              />
-            );
-          })}
-        </div>
-        <button
-          className="form-button"
-          onClick={submitForm}
-          disabled={markedAnswers.length == 0}
-        >
-          <img src={tick} alt="Submit" />
-        </button>
-      </form>
-      <div className="chat-wave">
-        <img src={chatWave} alt="Wavy curve" />
-      </div>
+      <h2 className="form-heading">{question.question}</h2>
+      <ChatFormHTML
+        question={question}
+        markedAnswers={markedAnswers}
+        setMarkedAnswers={setMarkedAnswers}
+        submitForm={submitForm}
+      />
+      <ChatFormBot submitForm={submitForm} markedAnswers={markedAnswers} />
     </section>
   );
 }

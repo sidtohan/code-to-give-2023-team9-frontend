@@ -1,0 +1,17 @@
+.outer_box{
+    display: flex;
+    flex-direction: row-reverse;
+    width: 100vw;
+    height: 12vh;
+    overflow-x: hidden;
+    /* border: 2px black solid; */
+}
+
+.button{
+    color: aqua;
+}
+
+.logo{
+    height: inherit;
+    width: auto;
+}

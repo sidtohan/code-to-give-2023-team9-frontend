@@ -34,7 +34,7 @@
 }
 .chat-header-name{
     font-weight: 800;
-    font-size: var(--font-large);
+    font-size: var(--font-medium);
 }
 .chat-header-status{
     display: flex;

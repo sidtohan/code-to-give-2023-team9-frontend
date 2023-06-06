@@ -6,7 +6,7 @@ import "../css/ending_page.css";
 
 function EndingPage() {
   return (
-    <div className="container">
+    <div className="container-ending">
       <Header></Header>
       <Image></Image>
       <Contact></Contact>

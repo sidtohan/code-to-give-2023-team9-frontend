@@ -3,7 +3,6 @@ import "../css/frontpage.css";
 import { Link } from "react-router-dom";
 
 const menu = document.getElementById("#menu");
-
 function FrontPage() {
   const [isActive, setActive] = useState("false");
   const ToggleClass = () => {

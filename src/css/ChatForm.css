@@ -10,7 +10,7 @@
     background-color: var(--secondary);
     background: url("../assets/curve.png");
     background-size: cover;
-    background-position: center 30vh;
+    background-position: center 15rem;
     background-repeat: no-repeat;
 }
 .chat-form-bot{
@@ -39,18 +39,22 @@
     margin: 0;
     width: 100%;
     font-size: var(--font-medium);
+    overflow-wrap: break-word;
 }
 .option-list{
     margin: 0 auto;
     width: 100%;
     display: grid;
     gap: 1rem;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0,1fr));
     grid-auto-rows: 1fr;
     padding: 1rem;
 }
 .chat-option{
     background-color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 0.6rem 1rem;
     color: var(--secondary);
     font-weight: 500;

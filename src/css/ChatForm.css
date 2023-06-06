@@ -1,12 +1,12 @@
 .chat-form{
     box-sizing: border-box;
-    padding: 2vh 1rem;
+    padding: 2rem 1rem;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     width: 100%;
-    min-height: 60%;
+    min-height: 60vh;
     background-color: var(--secondary);
     background: url("../assets/curve.png");
     background-size: cover;
@@ -26,6 +26,9 @@
     max-height: 15rem;
 }
 .chat-form > form{
+    display: flex;
+    flex-direction: column;
+    padding: 0.25rem 0;
     align-self: center;
     font-size: var(--font-small);
     width: 100%;
@@ -68,19 +71,16 @@
 .chat-option > input[type="checkbox"]{
     display: none;
 }
-.chat-wave{
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    z-index: -1;
-    height: 10rem;
-    width: 100vw;
+#input-slider{
+    width: 80%;
+    margin: 1rem auto;
 }
-.chat-wave > img{
-    position: absolute;
-    display: block;
-    bottom: -150%;
-    left: 0;
+.input-slider{
+    color: var(--primary);
+    font-size: var(--font-medium);
+    text-shadow: 0 0 0.1rem var(--primary);
+    font-weight: 500;
+    padding: 0.5rem 0;
 }
 .form-button-holder{
     width: 50%;
@@ -109,3 +109,28 @@
 .form-button:disabled{
     opacity: 0.5;
 }
+input[type="range"] {
+    -webkit-appearance: none;
+    height: 0.5rem;
+    width: 1rem;
+    border-radius: 1rem;
+    background-color: var(--primary);
+  }
+  
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 1rem;
+    width: 1rem;
+    border-radius: 50%;
+    background: var(--secondary);
+    cursor: ew-resize;
+    box-shadow: 0 0 2px 0 #555;
+  }
+  
+  input[type=range]::-webkit-slider-runnable-track  {
+    -webkit-appearance: none;
+    box-shadow: none;
+    border: none;
+    background: transparent;
+  }
+  

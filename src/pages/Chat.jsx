@@ -13,8 +13,9 @@ export default function Chat() {
   ]);
   const [question, setQuestion] = useState({
     question: "What is frequency of drug consumption?",
-    type: "multi",
-    options: ["Daily", "Monthly", "Weekly", "Yearly"],
+    type: "range",
+    min: 0,
+    max: 100,
   });
   const messageHolderRef = useRef();
   useEffect(() => {

@@ -1,19 +1,18 @@
 import "../css/ChatForm.css";
 import { useRef, useState } from "react";
-import chatWave from "../assets/curve.png";
 import ChatFormBot from "./ChatFormBot";
 
-function ChatOption({ option, index, markedAnswers, setMarkedAnswers }) {
+function ChatOption({ option, index, answers, setAnswers }) {
   const [checked, setChecked] = useState(false);
   const labelRef = useRef();
   const handleChange = () => {
     if (checked === false) {
-      const newMarkedAnswers = [...markedAnswers, option];
-      setMarkedAnswers(newMarkedAnswers);
+      const newanswers = [...answers, option];
+      setAnswers(newanswers);
     } else {
-      const newMarkedAnswers = [...markedAnswers];
-      newMarkedAnswers.pop();
-      setMarkedAnswers(newMarkedAnswers);
+      const newanswers = [...answers];
+      newanswers.pop();
+      setAnswers(newanswers);
     }
     labelRef.current.classList.toggle("invert");
     setChecked(!checked);
@@ -32,48 +31,92 @@ function ChatOption({ option, index, markedAnswers, setMarkedAnswers }) {
     </label>
   );
 }
-const ChatFormHTML = ({ question, markedAnswers, setMarkedAnswers }) => {
+const ChatFormOptions = ({ question, answers, setAnswers }) => {
   return (
-    <form>
-      <div className="option-list">
-        {question.options.map((option, i) => {
-          return (
-            <ChatOption
-              key={i}
-              option={option}
-              index={i}
-              markedAnswers={markedAnswers}
-              setMarkedAnswers={setMarkedAnswers}
-            />
-          );
-        })}
-      </div>
-    </form>
+    <div className="option-list">
+      {question.options.map((option, i) => {
+        return (
+          <ChatOption
+            key={`${question.question}${i}`}
+            option={option}
+            index={i}
+            answers={answers}
+            setAnswers={setAnswers}
+          />
+        );
+      })}
+    </div>
   );
 };
+const ChatFormSlider = ({ question, setAnswers }) => {
+  const minVal = question.min;
+  const maxVal = question.max;
+  const [value, setValue] = useState(0);
+  const handleChange = (e) => {
+    setValue(e.target.value);
+    setAnswers([e.target.value]);
+  };
+  return (
+    <>
+      <input
+        type="range"
+        id="input-slider"
+        min={minVal}
+        max={maxVal}
+        value={value}
+        onChange={handleChange}
+      />
+      <label className="input-slider" htmlFor="input-slider">
+        {value}
+      </label>
+    </>
+  );
+};
+const RenderQuestion = ({ question, answers, setAnswers, submitForm }) => {
+  if (question.type === "option")
+    return (
+      <ChatFormOptions
+        question={question}
+        answers={answers}
+        setAnswers={setAnswers}
+        submitForm={submitForm}
+      />
+    );
+  else if (question.type === "range")
+    return (
+      <ChatFormSlider
+        question={question}
+        answers={answers}
+        setAnswers={setAnswers}
+      />
+    );
+};
 export default function ChatForm({ question, messages, setMessages }) {
-  const [markedAnswers, setMarkedAnswers] = useState([]);
+  const [answers, setAnswers] = useState([]);
   const submitForm = (e) => {
     e.preventDefault();
     const newMessages = [
       ...messages,
       {
         question: question.question,
-        answers: markedAnswers,
+        answers: answers,
       },
     ];
     setMessages(newMessages);
   };
+
   return (
     <section className="chat-form">
       <h2 className="form-heading">{question.question}</h2>
-      <ChatFormHTML
-        question={question}
-        markedAnswers={markedAnswers}
-        setMarkedAnswers={setMarkedAnswers}
-        submitForm={submitForm}
-      />
-      <ChatFormBot submitForm={submitForm} markedAnswers={markedAnswers} />
+      <form>
+        <RenderQuestion
+          question={question}
+          answers={answers}
+          setAnswers={setAnswers}
+          submitForm={submitForm}
+        />
+      </form>
+      <ChatFormBot submitForm={submitForm} answers={answers} />
     </section>
   );
 }

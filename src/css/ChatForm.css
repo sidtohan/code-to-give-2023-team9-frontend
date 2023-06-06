@@ -1,13 +1,12 @@
 .chat-form{
     box-sizing: border-box;
-    width: 100%;
     padding: 2vh 1rem;
-    padding-bottom: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    min-height: 60%;
     background-color: var(--secondary);
     background: url("../assets/curve.png");
     background-size: cover;
@@ -24,7 +23,7 @@
     display: block;
     width: 50%;
     height: auto;
-    max-height: 20rem;
+    max-height: 15rem;
 }
 .chat-form > form{
     align-self: center;

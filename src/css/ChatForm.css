@@ -82,6 +82,30 @@
     font-weight: 500;
     padding: 0.5rem 0;
 }
+.input-text{
+    border-radius: 3rem;
+    width: 100%;
+    margin: 0 auto;
+    padding: 1rem;
+}
+#input-text{
+    position: relative;
+    border: none;
+    width: 80%;
+    background-color: var(--secondary);
+    font-family: var(--font-fam);
+    font-size: var(--font-small);
+    text-align: center;
+    color: var(--primary);
+    text-shadow: 0 0 0.1rem var(--primary);
+}
+#input-text::placeholder{
+    font-family: var(--font-fam);
+    font-size: var(--font-small);
+}
+#input-text:focus{
+    outline: none;  
+}
 .form-button-holder{
     width: 50%;
     display: flex;

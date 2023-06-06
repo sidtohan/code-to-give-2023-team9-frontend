@@ -12,10 +12,8 @@ export default function Chat() {
     },
   ]);
   const [question, setQuestion] = useState({
-    question: "What is frequency of drug consumption?",
-    type: "range",
-    min: 0,
-    max: 100,
+    question: "What is your name?",
+    type: "text",
   });
   const messageHolderRef = useRef();
   useEffect(() => {

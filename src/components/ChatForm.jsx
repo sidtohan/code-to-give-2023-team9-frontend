@@ -7,12 +7,12 @@ function ChatOption({ option, index, answers, setAnswers }) {
   const labelRef = useRef();
   const handleChange = () => {
     if (checked === false) {
-      const newanswers = [...answers, option];
-      setAnswers(newanswers);
+      const newAnswers = [...answers, option];
+      setAnswers(newAnswers);
     } else {
-      const newanswers = [...answers];
-      newanswers.pop();
-      setAnswers(newanswers);
+      const newAnswers = [...answers];
+      newAnswers.pop();
+      setAnswers(newAnswers);
     }
     labelRef.current.classList.toggle("invert");
     setChecked(!checked);
@@ -72,6 +72,28 @@ const ChatFormSlider = ({ question, setAnswers }) => {
     </>
   );
 };
+
+const ChatFormText = ({ setAnswers }) => {
+  const [textInput, setTextInput] = useState("");
+
+  const handleTextChange = (e) => {
+    setTextInput(e.target.value);
+    if (e.target.value.length === 0) setAnswers([]);
+    else setAnswers([e.target.value]);
+  };
+  return (
+    <label htmlFor="input-text" className="input-text">
+      <input
+        id="input-text"
+        type="text"
+        value={textInput}
+        onChange={handleTextChange}
+        placeholder="Enter your answer"
+        className="input-box"
+      />
+    </label>
+  );
+};
 const RenderQuestion = ({ question, answers, setAnswers, submitForm }) => {
   if (question.type === "option")
     return (
@@ -83,18 +105,14 @@ const RenderQuestion = ({ question, answers, setAnswers, submitForm }) => {
       />
     );
   else if (question.type === "range")
-    return (
-      <ChatFormSlider
-        question={question}
-        answers={answers}
-        setAnswers={setAnswers}
-      />
-    );
+    return <ChatFormSlider question={question} setAnswers={setAnswers} />;
+  else return <ChatFormText setAnswers={setAnswers} />;
 };
 export default function ChatForm({ question, messages, setMessages }) {
   const [answers, setAnswers] = useState([]);
   const submitForm = (e) => {
     e.preventDefault();
+    if (answers.length === 0) return;
     const newMessages = [
       ...messages,
       {
@@ -103,12 +121,13 @@ export default function ChatForm({ question, messages, setMessages }) {
       },
     ];
     setMessages(newMessages);
+    setAnswers([]);
   };
 
   return (
     <section className="chat-form">
       <h2 className="form-heading">{question.question}</h2>
-      <form>
+      <form onSubmit={submitForm}>
         <RenderQuestion
           question={question}
           answers={answers}

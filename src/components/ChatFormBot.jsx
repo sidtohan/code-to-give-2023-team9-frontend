@@ -8,7 +8,7 @@ export default function ChatFormBot({ submitForm, answers }) {
         <button
           className="form-button"
           onClick={submitForm}
-          disabled={answers.length == 0}
+          disabled={answers.length === 0}
         >
           <img src={arrow} alt="Submit" />
         </button>

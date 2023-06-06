@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "../css/frontpage.css";
+import { Link } from "react-router-dom";
 
 const menu = document.getElementById("#menu");
 
-function Frontpage() {
+function FrontPage() {
   const [isActive, setActive] = useState("false");
   const ToggleClass = () => {
     setActive(!isActive);
@@ -14,7 +15,9 @@ function Frontpage() {
       <nav className="navbar">
         <div className="menu">
           <div
-            className={isActive ? "hamburger-icon" : "hamburger-icon icon-transform"}
+            className={
+              isActive ? "hamburger-icon" : "hamburger-icon icon-transform"
+            }
             onClick={ToggleClass}
           >
             <div id="bar1" className="hamburger-icon-bar"></div>
@@ -22,7 +25,7 @@ function Frontpage() {
             <div id="bar3" className="hamburger-icon-bar"></div>
           </div>
           <div id="menu-content">
-            <ul className={isActive ? null :"menu-open" }>
+            <ul className={isActive ? null : "menu-open"}>
               <li className="hamburger">
                 <a href="https://breadsbangalore.org/">Home</a>
               </li>
@@ -52,7 +55,9 @@ function Frontpage() {
             <img className="bot-img" src={require("../assets/Bot.png")} />
           </div>
           <p className="bot-intro">{`Hi! I am Zivi Your personal Chatbot`}</p>
-          <button className="chat-button">Let's chat</button>
+          <Link to={"/chat"} className="chat-button">
+            Let's chat
+          </Link>
         </div>
         <div className="description-container">
           <p className="description">
@@ -68,4 +73,4 @@ function Frontpage() {
   );
 }
 
-export default Frontpage;
+export default FrontPage;

@@ -172,16 +172,15 @@ nav ul {
 .description::before{
     content: "";
     width: 100vw;
-    height: 5rem;
+    height: 100vh;
     position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
+    bottom: 90%;
+    left: 0;
     background: url("../assets/wave.svg");
     background-repeat: no-repeat;
-    background-size: 200%;
-    background-position: center center;
-    z-index: 1;
+    background-size: 100%;
+    background-position: center bottom;
+    z-index: 0;
 }
 
 .description {

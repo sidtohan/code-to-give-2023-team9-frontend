@@ -2,12 +2,12 @@ import "../css/ChatForm.css";
 import { useRef, useState } from "react";
 import ChatFormBot from "./ChatFormBot";
 
-function ChatOption({ option, index, answers, setAnswers }) {
+function ChatOption({ option, index, answers, setAnswers, optionLimit }) {
   const [checked, setChecked] = useState(false);
   const labelRef = useRef();
   const handleChange = () => {
     if (checked === false) {
-      const newAnswers = [...answers, option];
+      const newAnswers = [...answers, option.option];
       setAnswers(newAnswers);
     } else {
       const newAnswers = [...answers];
@@ -18,7 +18,14 @@ function ChatOption({ option, index, answers, setAnswers }) {
     setChecked(!checked);
   };
   return (
-    <label className="chat-option" htmlFor={index} ref={labelRef}>
+    <label
+      className={
+        "chat-option" +
+        (checked === false && answers.length >= optionLimit ? " disabled" : "")
+      }
+      htmlFor={index}
+      ref={labelRef}
+    >
       <input
         type="checkbox"
         id={index}
@@ -26,12 +33,14 @@ function ChatOption({ option, index, answers, setAnswers }) {
         value={option}
         checked={checked}
         onChange={handleChange}
+        disabled={checked === false && answers.length >= optionLimit}
       />
-      {option}
+      {option.option}
     </label>
   );
 }
 const ChatFormOptions = ({ question, answers, setAnswers }) => {
+  const optionLimit = question.type === "multi-correct" ? 5 : 1;
   return (
     <div className="option-list">
       {question.options.map((option, i) => {
@@ -42,6 +51,7 @@ const ChatFormOptions = ({ question, answers, setAnswers }) => {
             index={i}
             answers={answers}
             setAnswers={setAnswers}
+            optionLimit={optionLimit}
           />
         );
       })}
@@ -95,20 +105,25 @@ const ChatFormText = ({ setAnswers }) => {
   );
 };
 const RenderQuestion = ({ question, answers, setAnswers, submitForm }) => {
-  if (question.type === "option")
+  if (question.type === "multi-correct" || question.type === "single-correct")
     return (
       <ChatFormOptions
         question={question}
         answers={answers}
         setAnswers={setAnswers}
-        submitForm={submitForm}
       />
     );
-  else if (question.type === "range")
+  else if (question.type === "slider")
     return <ChatFormSlider question={question} setAnswers={setAnswers} />;
   else return <ChatFormText setAnswers={setAnswers} />;
 };
-export default function ChatForm({ question, messages, setMessages }) {
+export default function ChatForm({
+  question,
+  messages,
+  setMessages,
+  userInfo,
+  setUserInfo,
+}) {
   const [answers, setAnswers] = useState([]);
   const submitForm = (e) => {
     e.preventDefault();
@@ -116,17 +131,22 @@ export default function ChatForm({ question, messages, setMessages }) {
     const newMessages = [
       ...messages,
       {
-        question: question.question,
+        question: question.text,
         answers: answers,
       },
     ];
+    const key = question.key;
+    const newUserInfo = { ...userInfo };
+    if (question.type === "multi-correct") newUserInfo[key] = answers;
+    else newUserInfo[key] = answers[0];
+    setUserInfo(newUserInfo);
     setMessages(newMessages);
     setAnswers([]);
   };
 
   return (
     <section className="chat-form">
-      <h2 className="form-heading">{question.question}</h2>
+      <h2 className="form-heading">{question ? question.text : ""}</h2>
       <form onSubmit={submitForm}>
         <RenderQuestion
           question={question}

@@ -7,7 +7,7 @@ function ChatOption({ option, index, answers, setAnswers }) {
   const labelRef = useRef();
   const handleChange = () => {
     if (checked === false) {
-      const newAnswers = [...answers, option];
+      const newAnswers = [...answers, option.option];
       setAnswers(newAnswers);
     } else {
       const newAnswers = [...answers];
@@ -27,11 +27,12 @@ function ChatOption({ option, index, answers, setAnswers }) {
         checked={checked}
         onChange={handleChange}
       />
-      {option}
+      {option.option}
     </label>
   );
 }
 const ChatFormOptions = ({ question, answers, setAnswers }) => {
+  console.log(question);
   return (
     <div className="option-list">
       {question.options.map((option, i) => {
@@ -116,7 +117,7 @@ export default function ChatForm({ question, messages, setMessages }) {
     const newMessages = [
       ...messages,
       {
-        question: question.question,
+        question: question.text,
         answers: answers,
       },
     ];
@@ -126,7 +127,7 @@ export default function ChatForm({ question, messages, setMessages }) {
 
   return (
     <section className="chat-form">
-      <h2 className="form-heading">{question.question}</h2>
+      <h2 className="form-heading">{question ? question.text : ""}</h2>
       <form onSubmit={submitForm}>
         <RenderQuestion
           question={question}

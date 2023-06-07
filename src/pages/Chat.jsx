@@ -4,8 +4,10 @@ import ChatHeader from "../components/ChatHeader";
 import ChatMessageHolder from "../components/ChatMessageHolder";
 import ChatForm from "../components/ChatForm";
 import { useNavigate } from "react-router-dom";
+import { fetchQuestions } from "../utils/apiCall";
 
 export default function Chat() {
+  // Page for Chat
   const navigate = useNavigate();
   const [messages, setMessages] = useState([
     {
@@ -13,34 +15,39 @@ export default function Chat() {
       answers: ["Alright"],
     },
   ]);
-  const [questionIdx, setQuestionIdx] = useState(0);
-  const [questionList, setQuestionList] = useState([
-    { question: "What is your name?", type: "text" },
-    {
-      question: "What is the frequence of your drug consumption?",
-      type: "option",
-      options: ["Daily", "Weekly", "Biweekly", "Monthly"],
-    },
-    {
-      question: "What is your age?",
-      type: "range",
-      min: 15,
-      max: 60,
-    },
-  ]);
+  const [questionList, setQuestionList] = useState({});
   const [question, setQuestion] = useState({
-    question: "Welcome to the Chat. Select the below option to begin",
+    text: "Welcome to the Chat. Select the below option to begin",
     type: "option",
     options: ["Yes"],
+    next: 1,
   });
+  const [userInfo, setUserInfo] = useState({});
   const messageHolderRef = useRef();
   const endingPage = () => navigate("/ending");
+
+  // Set new question
   useEffect(() => {
     messageHolderRef.current.scrollTop = messageHolderRef.current.scrollHeight;
-    if (questionIdx === questionList.length) endingPage();
-    setQuestion(questionList[questionIdx]);
-    setQuestionIdx(questionIdx + 1);
+    if (question.next === null) {
+      // Ends here
+      endingPage();
+    }
+    console.log(questionList[question.next]);
+    setQuestion(questionList[question.next]);
   }, [messages]);
+
+  // Initial Call
+  useEffect(() => {
+    (async () => {
+      const { start, navigator } = await fetchQuestions();
+      setQuestionList(navigator);
+      setQuestion(navigator[start]);
+    })();
+    return () => {
+      // anything like loading etc
+    };
+  }, []);
   return (
     <div className="chat">
       <ChatHeader />

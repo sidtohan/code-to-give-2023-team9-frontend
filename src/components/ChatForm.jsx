@@ -2,7 +2,7 @@ import "../css/ChatForm.css";
 import { useRef, useState } from "react";
 import ChatFormBot from "./ChatFormBot";
 
-function ChatOption({ option, index, answers, setAnswers }) {
+function ChatOption({ option, index, answers, setAnswers, optionLimit }) {
   const [checked, setChecked] = useState(false);
   const labelRef = useRef();
   const handleChange = () => {
@@ -18,7 +18,14 @@ function ChatOption({ option, index, answers, setAnswers }) {
     setChecked(!checked);
   };
   return (
-    <label className="chat-option" htmlFor={index} ref={labelRef}>
+    <label
+      className={
+        "chat-option" +
+        (checked === false && answers.length >= optionLimit ? " disabled" : "")
+      }
+      htmlFor={index}
+      ref={labelRef}
+    >
       <input
         type="checkbox"
         id={index}
@@ -26,12 +33,14 @@ function ChatOption({ option, index, answers, setAnswers }) {
         value={option}
         checked={checked}
         onChange={handleChange}
+        disabled={checked === false && answers.length >= optionLimit}
       />
       {option.option}
     </label>
   );
 }
 const ChatFormOptions = ({ question, answers, setAnswers }) => {
+  const optionLimit = question.type === "multi-correct" ? 5 : 1;
   return (
     <div className="option-list">
       {question.options.map((option, i) => {
@@ -42,6 +51,7 @@ const ChatFormOptions = ({ question, answers, setAnswers }) => {
             index={i}
             answers={answers}
             setAnswers={setAnswers}
+            optionLimit={optionLimit}
           />
         );
       })}
@@ -101,7 +111,6 @@ const RenderQuestion = ({ question, answers, setAnswers, submitForm }) => {
         question={question}
         answers={answers}
         setAnswers={setAnswers}
-        submitForm={submitForm}
       />
     );
   else if (question.type === "slider")

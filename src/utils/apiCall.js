@@ -1,5 +1,13 @@
-export const fetchQuestions = async () => {
+import axios from "axios";
+const url = process.env.URL || "http://localhost:3000";
+
+export const fetchQuestions = async (formID) => {
   // Add logic for fetching from API here
+  // const quesList = await axios.get(url + "/form", {
+  //   params: {
+  //     formID,
+  //   },
+  // });
   const quesList = [
     {
       id: 1,
@@ -13,7 +21,7 @@ export const fetchQuestions = async () => {
     {
       id: 2,
       text: "What locality do you belong from?",
-      type: "multi-correct",
+      type: "single-correct",
       required: true,
       options: [
         { option: "XYZ", next: null },
@@ -26,14 +34,13 @@ export const fetchQuestions = async () => {
     {
       id: 3,
       text: "What substance do you abuse?",
-      type: "single-correct",
+      type: "multi-correct",
       required: true,
       options: ["Alcohol", "Tobacco"],
       key: "substance_abused",
       next: null,
     },
   ];
-
   // Generate hashmap for navigating next
   const navigator = {};
   for (let ques in quesList) {

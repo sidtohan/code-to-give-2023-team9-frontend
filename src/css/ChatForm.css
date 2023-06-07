@@ -64,6 +64,9 @@
     background-color: var(--secondary);
     color: var(--primary);
 }
+.chat-option.disabled{
+    opacity: 0.5;
+}
 .chat-option > input[type="checkbox"]{
     display: none;
 }

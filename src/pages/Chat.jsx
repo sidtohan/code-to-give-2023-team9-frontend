@@ -40,7 +40,7 @@ export default function Chat() {
   // Initial Call
   useEffect(() => {
     (async () => {
-      const { start, navigator } = await fetchQuestions();
+      const { start, navigator } = await fetchQuestions("N3ko6oWFCTLO9BWiqgdD");
       setQuestionList(navigator);
       setQuestion(navigator[start]);
     })();

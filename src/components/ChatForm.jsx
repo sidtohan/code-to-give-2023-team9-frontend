@@ -95,7 +95,7 @@ const ChatFormText = ({ setAnswers }) => {
   );
 };
 const RenderQuestion = ({ question, answers, setAnswers, submitForm }) => {
-  if (question.type === "option")
+  if (question.type === "multi-correct" || question.type === "single-correct")
     return (
       <ChatFormOptions
         question={question}
@@ -104,7 +104,7 @@ const RenderQuestion = ({ question, answers, setAnswers, submitForm }) => {
         submitForm={submitForm}
       />
     );
-  else if (question.type === "range")
+  else if (question.type === "slider")
     return <ChatFormSlider question={question} setAnswers={setAnswers} />;
   else return <ChatFormText setAnswers={setAnswers} />;
 };
@@ -128,7 +128,8 @@ export default function ChatForm({
     ];
     const key = question.key;
     const newUserInfo = { ...userInfo };
-    newUserInfo[key] = answers;
+    if (question.type === "multi-correct") newUserInfo[key] = answers;
+    else newUserInfo[key] = answers[0];
     setUserInfo(newUserInfo);
     setMessages(newMessages);
     setAnswers([]);

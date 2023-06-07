@@ -13,7 +13,7 @@ export const fetchQuestions = async () => {
     {
       id: 2,
       text: "What locality do you belong from?",
-      type: "option",
+      type: "multi-correct",
       required: true,
       options: [
         { option: "XYZ", next: null },
@@ -26,7 +26,7 @@ export const fetchQuestions = async () => {
     {
       id: 3,
       text: "What substance do you abuse?",
-      type: "multipleChoice",
+      type: "single-correct",
       required: true,
       options: ["Alcohol", "Tobacco"],
       key: "substance_abused",

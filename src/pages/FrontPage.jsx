@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
 import "../css/frontpage.css";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+import BotImage from "../assets/Bot.svg";
 const menu = document.getElementById("#menu");
 function FrontPage() {
   const [isActive, setActive] = useState("false");
@@ -51,7 +52,7 @@ function FrontPage() {
       <div className="container">
         <div className="chatbot-container">
           <div className="bot-img-bg">
-            <img className="bot-img" src={require("../assets/Bot.png")} />
+            <img className="bot-img" src={BotImage} />
           </div>
           <p className="bot-intro">{`Hi! I am Zivi Your personal Chatbot`}</p>
           <Link to={"/chat"} className="chat-button">

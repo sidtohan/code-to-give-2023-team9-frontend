@@ -31,6 +31,7 @@ export default function Chat() {
     messageHolderRef.current.scrollTop = messageHolderRef.current.scrollHeight;
     if (question.next === null) {
       // Ends here
+      console.log(userInfo);
       endingPage();
     }
     console.log(questionList[question.next]);
@@ -57,6 +58,8 @@ export default function Chat() {
         messages={messages}
         setMessages={setMessages}
         messageHolderRef={messageHolderRef}
+        userInfo={userInfo}
+        setUserInfo={setUserInfo}
       />
     </div>
   );

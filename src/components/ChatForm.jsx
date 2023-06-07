@@ -109,7 +109,13 @@ const RenderQuestion = ({ question, answers, setAnswers, submitForm }) => {
     return <ChatFormSlider question={question} setAnswers={setAnswers} />;
   else return <ChatFormText setAnswers={setAnswers} />;
 };
-export default function ChatForm({ question, messages, setMessages }) {
+export default function ChatForm({
+  question,
+  messages,
+  setMessages,
+  userInfo,
+  setUserInfo,
+}) {
   const [answers, setAnswers] = useState([]);
   const submitForm = (e) => {
     e.preventDefault();
@@ -121,6 +127,10 @@ export default function ChatForm({ question, messages, setMessages }) {
         answers: answers,
       },
     ];
+    const key = question.key;
+    const newUserInfo = { ...userInfo };
+    newUserInfo[key] = answers;
+    setUserInfo(newUserInfo);
     setMessages(newMessages);
     setAnswers([]);
   };

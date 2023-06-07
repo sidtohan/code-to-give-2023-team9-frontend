@@ -7,17 +7,13 @@
     align-items: center;
     width: 100%;
     min-height: 60vh;
-    background-color: var(--secondary);
-    background: url("../assets/curve.png");
-    background-size: cover;
-    background-position: center 15rem;
-    background-repeat: no-repeat;
 }
 .chat-form-bot{
     position: relative;
     display: flex;
     width: 100%;
     height: 100%;
+    justify-self: flex-end;
 }
 .chat-form-bot > img{
     display: block;
@@ -158,3 +154,14 @@ input[type="range"] {
     background: transparent;
   }
   
+  @media(max-height: 745px) {
+    .chat-form-bot > img{
+        max-height: 12rem;
+    }
+  }
+
+  @media (max-height: 680px){
+    .chat-form-bot > img{
+        max-height: 11rem;
+    }
+  }

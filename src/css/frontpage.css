@@ -25,43 +25,51 @@ body {
 }
 
 .hamburger-icon {
-    width: 35px;
-    height: 30px;
-    padding: 1.8em;
-    padding-bottom: 1.4em;
+    width: 0.5rem;
+    height: 1rem;
+    padding: 2rem 2.5rem;
     cursor: pointer;
     z-index: 100;
-    position: absolute;
+    position: relative;
 }
 
 
 .hamburger-icon-bar {
     height: 4px;
-    width: 100%;
+    width: 2.5rem;
     background-color: #000000;
     display: block;
     outline: red 5px;
     transition: 0.3s ease;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 #bar1 {
-    transform: translateY(-4px);
+    top: 35%;
 }
 
+#bar2{
+    top: 50%;
+}
 #bar3 {
-    transform: translateY(4px);
+    top: 65%;
 }
 
 .icon-transform #bar1 {
-    transform: translateY(4px) rotate(-45deg);
+    background-color: var(--secondary);
+    transform: translateX(-50%) translateY(250%) rotate(-45deg);
 }
 
 .icon-transform #bar2 {
+    background-color: var(--secondary);
     opacity: 0;
 }
 
 .icon-transform #bar3 {
-    transform: translateY(-4px) rotate(45deg);
+    background-color: var(--secondary);
+    transform: translateX(-50%) translateY(-250%) rotate(45deg);
 }
 
 #menu-content {

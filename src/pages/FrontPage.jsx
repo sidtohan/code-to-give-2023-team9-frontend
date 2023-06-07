@@ -60,6 +60,7 @@ function FrontPage() {
           </Link>
         </div>
         <div className="description-container">
+          <div className="wave-container"></div>
           <p className="description">
             Drug Rehabilitation Education and Mentoring (DREAM) is a
             rights-based initiative of BREADS started in November 2021, which

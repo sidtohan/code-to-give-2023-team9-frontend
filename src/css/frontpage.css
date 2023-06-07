@@ -121,6 +121,7 @@ nav ul {
     align-items: center;
     background: transparent;
     margin: 3em;
+    z-index: 2;
 }
 
 .bot-img-bg {
@@ -167,10 +168,11 @@ nav ul {
     height: 100%;
     max-height: 38%;
     padding-top: 0;
+    z-index: 0;
+    position: relative;
 }
 
-.description::before{
-    content: "";
+.wave-container{
     width: 100vw;
     height: 100vh;
     position: absolute;
@@ -180,7 +182,7 @@ nav ul {
     background-repeat: no-repeat;
     background-size: 100%;
     background-position: center bottom;
-    z-index: 0;
+    z-index: -1;
 }
 
 .description {
@@ -190,6 +192,7 @@ nav ul {
     text-align: center;
     padding: 1em;
     position: relative;
+    z-index: 2;
 }
 
 

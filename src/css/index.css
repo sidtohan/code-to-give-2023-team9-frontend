@@ -6,8 +6,8 @@
   'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
   sans-serif;
   --font-small: 16px;
-  --font-medium: 20px;
-  --font-large: 24px;
+  --font-medium: 22px;
+  --font-large: 26px;
 }
 body {
   margin: 0;
@@ -22,5 +22,20 @@ body {
   height:100vh;
   background-color: var(--secondary);
   overflow: auto !important;
+}
+
+@media (min-width: 480px){
+  :root{
+    --font-small: 20px;
+    --font-medium: 26px;
+    --font-large: 30px;
+  }
+}
+@media (min-width: 768px) {
+    :root{
+      --font-small: 24px;
+      --font-medium: 30px;
+      --font-large: 36px;
+    }
 }
 

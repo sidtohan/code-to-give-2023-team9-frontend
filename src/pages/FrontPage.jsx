@@ -1,5 +1,6 @@
 import "../css/frontpage.css";
 import React, { useEffect, useState } from "react";
+import Wave from "../assets/wave.svg";
 import { Link } from "react-router-dom";
 
 import BotImage from "../assets/Bot.svg";
@@ -60,7 +61,9 @@ function FrontPage() {
           </Link>
         </div>
         <div className="description-container">
-          <div className="wave-container"></div>
+          <div className="wave-container">
+            <img src={Wave} alt="Wave" />
+          </div>
           <p className="description">
             Drug Rehabilitation Education and Mentoring (DREAM) is a
             rights-based initiative of BREADS started in November 2021, which

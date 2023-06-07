@@ -34,7 +34,6 @@ export default function Chat() {
       console.log(userInfo);
       endingPage();
     }
-    console.log(questionList[question.next]);
     setQuestion(questionList[question.next]);
   }, [messages]);
 

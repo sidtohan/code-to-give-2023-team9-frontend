@@ -32,7 +32,6 @@ function ChatOption({ option, index, answers, setAnswers }) {
   );
 }
 const ChatFormOptions = ({ question, answers, setAnswers }) => {
-  console.log(question);
   return (
     <div className="option-list">
       {question.options.map((option, i) => {

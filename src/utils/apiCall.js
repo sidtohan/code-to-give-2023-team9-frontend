@@ -25,8 +25,8 @@ export const fetchQuestions = async (formID) => {
       required: true,
       options: [
         { option: "XYZ", next: null },
-        { option: "ABC", next: null },
-        { option: "DEF", next: null },
+        { option: "ABC", next: 3 },
+        { option: "DEF", next: 1 },
       ],
       key: "locality",
       next: 3,

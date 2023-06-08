@@ -54,6 +54,7 @@ export default function Chat() {
       <ChatMessageHolder messages={messages} ref={messageHolderRef} />
       <ChatForm
         question={question}
+        setQuestion={setQuestion}
         messages={messages}
         setMessages={setMessages}
         messageHolderRef={messageHolderRef}

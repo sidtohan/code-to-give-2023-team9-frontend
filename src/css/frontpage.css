@@ -342,11 +342,32 @@ nav ul {
 
 /* Responsive Horizontal */
 
-@media (min-width: 768px){
+@media (min-width: 480px){
     .bot-img-bg{
         max-width: 15rem;
     }
     .description{
         padding-bottom: 10rem;
     }
+    .navbar{
+        height: 5.5rem;
+    }
 }
+
+@media (min-width: 768px){
+    .navbar{
+        height: 6rem;
+    }
+    .bot-img{
+        max-width: 16rem;
+    }
+    .description{
+        padding-bottom: 12rem;
+    }
+}
+@media (min-width: 1024px) {
+    .navbar{
+        height: 7rem;
+    }
+}
+

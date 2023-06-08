@@ -3,49 +3,23 @@ const url = process.env.URL || "http://localhost:3000";
 
 export const fetchQuestions = async (formID) => {
   // Add logic for fetching from API here
-  // const quesList = await axios.get(url + "/form", {
-  //   params: {
-  //     formID,
-  //   },
-  // });
-  const quesList = [
-    {
-      id: 1,
-      text: "What is your age?",
-      type: "text",
-      required: true,
-      dataType: "number",
-      key: "age",
-      next: 2,
+  let quesList = await axios.get(url + "/form", {
+    params: {
+      formID,
     },
-    {
-      id: 2,
-      text: "What locality do you belong from?",
-      type: "single-correct",
-      required: true,
-      options: [
-        { option: "XYZ", next: null },
-        { option: "ABC", next: 3 },
-        { option: "DEF", next: 1 },
-      ],
-      key: "locality",
-      next: 3,
-    },
-    {
-      id: 3,
-      text: "What substance do you abuse?",
-      type: "multi-correct",
-      required: true,
-      options: ["Alcohol", "Tobacco"],
-      key: "substance_abused",
-      next: null,
-    },
-  ];
+  });
+  const start = quesList.data.startPath["_path"]["segments"][3];
+  quesList = quesList.data.docs;
   // Generate hashmap for navigating next
   const navigator = {};
   for (let ques in quesList) {
+    if (!quesList[ques]["next"]) {
+      quesList[ques].nextLink = null;
+    } else if (quesList[ques].type !== "single-correct") {
+      quesList[ques].nextLink = quesList[ques]["next"]["_path"]["segments"][3];
+    }
     navigator[quesList[ques].id] = quesList[ques];
   }
-  const start = 1;
+  console.log(navigator);
   return { start, navigator };
 };

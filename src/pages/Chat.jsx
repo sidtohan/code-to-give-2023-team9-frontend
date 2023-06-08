@@ -29,18 +29,18 @@ export default function Chat() {
   // Set new question
   useEffect(() => {
     messageHolderRef.current.scrollTop = messageHolderRef.current.scrollHeight;
-    if (question.next === null) {
+    if (question.nextLink === null) {
       // Ends here
       console.log(userInfo);
       endingPage();
     }
-    setQuestion(questionList[question.next]);
+    setQuestion(questionList[question.nextLink]);
   }, [messages]);
 
   // Initial Call
   useEffect(() => {
     (async () => {
-      const { start, navigator } = await fetchQuestions("N3ko6oWFCTLO9BWiqgdD");
+      const { start, navigator } = await fetchQuestions("IDtwe0lZDI7dBSeoHOZm");
       setQuestionList(navigator);
       setQuestion(navigator[start]);
     })();

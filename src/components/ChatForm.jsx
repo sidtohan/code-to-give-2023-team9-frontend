@@ -23,7 +23,7 @@ function ChatOption({
       if (question.type === "single-correct") {
         // Modify next of question
         // that is needed for the single correct question
-        setQuestion({ ...question, next: option.next });
+        setQuestion({ ...question, nextLink: option.next });
       }
     } else {
       const newAnswers = [...answers];
@@ -123,6 +123,7 @@ const ChatFormText = ({ setAnswers }) => {
   );
 };
 const RenderQuestion = ({ question, answers, setAnswers, setQuestion }) => {
+  if (!question) return <></>;
   if (question.type === "multi-correct" || question.type === "single-correct")
     return (
       <ChatFormOptions

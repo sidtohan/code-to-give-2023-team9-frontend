@@ -1,12 +1,13 @@
 import "../css/Chat.css";
 import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
 import ChatHeader from "../components/ChatHeader";
 import ChatMessageHolder from "../components/ChatMessageHolder";
 import ChatForm from "../components/ChatForm";
 import { useNavigate } from "react-router-dom";
 import { fetchQuestions, submitResponse } from "../utils/apiCall";
 
-export default function Chat() {
+export default function Chat({ variants }) {
   // Page for Chat
   const navigate = useNavigate();
   const [messages, setMessages] = useState([
@@ -50,7 +51,17 @@ export default function Chat() {
     };
   }, []);
   return (
-    <div className="chat">
+    <motion.div
+      className="chat"
+      variants={variants}
+      initial={"initial"}
+      animate={"animate"}
+      exit={"exit"}
+      transition={{
+        duration: 0.5,
+        type: "spring",
+      }}
+    >
       <ChatHeader />
       <ChatMessageHolder messages={messages} ref={messageHolderRef} />
       <ChatForm
@@ -62,6 +73,6 @@ export default function Chat() {
         userInfo={userInfo}
         setUserInfo={setUserInfo}
       />
-    </div>
+    </motion.div>
   );
 }

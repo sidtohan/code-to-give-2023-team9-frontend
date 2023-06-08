@@ -1,18 +1,42 @@
 import "../css/frontpage.css";
 import React, { useEffect, useState } from "react";
+import { animate, motion } from "framer-motion";
 import Wave from "../assets/wave.svg";
-import { Link } from "react-router-dom";
+import { Link, Route } from "react-router-dom";
 
 import BotImage from "../assets/Bot.svg";
 const menu = document.getElementById("#menu");
-function FrontPage() {
+function FrontPage({ variants }) {
   const [isActive, setActive] = useState("false");
   const ToggleClass = () => {
     setActive(!isActive);
   };
-
+  const descriptionVariant = {
+    offscreen: {
+      y: 10,
+      opacity: 0,
+    },
+    onscreen: {
+      y: 0,
+      opacity: 1,
+      rotate: -8,
+      transition: {
+        type: "spring",
+        bounce: 0.4,
+      },
+    },
+  };
   return (
-    <div>
+    <motion.div
+      variants={variants}
+      initial={"initial"}
+      animate={"animate"}
+      exit={"exit"}
+      transition={{
+        duration: 0.5,
+        type: "spring",
+      }}
+    >
       <nav className="navbar">
         <div className="menu">
           <div
@@ -26,54 +50,109 @@ function FrontPage() {
             <div id="bar3" className="hamburger-icon-bar"></div>
           </div>
           <div id="menu-content">
-            <ul className={isActive ? null : "menu-open"}>
-              <li className="hamburger">
+            <motion.ul className={isActive ? null : "menu-open"}>
+              <motion.li
+                className="hamburger"
+                whileHover={{ scale: 1.1 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              >
                 <a href="https://breadsbangalore.org/">Home</a>
-              </li>
-              <li className="hamburger">
+              </motion.li>
+              <motion.li
+                className="hamburger"
+                whileHover={{ scale: 1.1 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              >
                 <a href="">About Us</a>
-              </li>
-              <li className="hamburger">
+              </motion.li>
+              <motion.li
+                className="hamburger"
+                whileHover={{ scale: 1.1 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              >
                 <a href="">Talk with Zivi</a>
-              </li>
-              <li className="hamburger">
+              </motion.li>
+              <motion.li
+                className="hamburger"
+                whileHover={{ scale: 1.1 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              >
                 <a href="https://breadsbangalore.org/dream">Our Projects</a>
-              </li>
-              <li className="hamburger">
+              </motion.li>
+              <motion.li
+                className="hamburger"
+                whileHover={{ scale: 1.1 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              >
                 <a href="https://breadsbangalore.org/CSR">CSR</a>
-              </li>
-              <li className="hamburger">
+              </motion.li>
+              <motion.li
+                className="hamburger"
+                whileHover={{ scale: 1.1 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              >
                 <a href="https://breadsbangalore.org/contact">Contact</a>
-              </li>
-            </ul>
+              </motion.li>
+            </motion.ul>
           </div>
         </div>
         <img className="breads-logo" src={require("../assets/logo.png")} />
       </nav>
       <div className="container">
         <div className="chatbot-container">
-          <div className="bot-img-bg">
+          <motion.div
+            className="bot-img-bg"
+            initial={{
+              y: -30,
+              opacity: 0,
+              rotate: 20,
+            }}
+            animate={{
+              y: 0,
+              opacity: 1,
+              rotate: 0,
+            }}
+            transition={{
+              delay: 0.9,
+              type: "spring",
+              damping: 20,
+            }}
+          >
             <img className="bot-img" src={BotImage} />
-          </div>
+          </motion.div>
           <p className="bot-intro">{`Hi! I am Zivi Your personal Chatbot`}</p>
           <Link to={"/chat"} className="chat-button">
-            Let's chat
+            <motion.div
+              whileHover={{ scale: 1.1 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+            >
+              Let's chat
+            </motion.div>
           </Link>
         </div>
-        <div className="description-container">
-          <div className="wave-container">
-            <img src={Wave} alt="Wave" />
-          </div>
-          <p className="description">
+
+        <div className="wave-container">
+          <img src={Wave} alt="Wave" />
+        </div>
+        <motion.div
+          initial="offscreen"
+          whileInView="onscreen"
+          viewport={{
+            once: false,
+            amount: 0.8,
+          }}
+          className="description-container"
+        >
+          <motion.p variants={descriptionVariant} className="description">
             Drug Rehabilitation Education and Mentoring (DREAM) is a
             rights-based initiative of BREADS started in November 2021, which
             aims to empower lakhs of children and youth to dream beyond drugs.
             DREAM specifically focuses on children, especially adolescents and
             youth who can easily fall prey to drug abuse.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

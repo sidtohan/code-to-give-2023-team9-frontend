@@ -90,8 +90,11 @@ nav ul {
 .navbar li a {
     text-decoration: none;
     color: #ffffff;
+    transition: 0.3s ease-in-out;
 }
-
+.navbar li a:hover{
+    color: var(--primary) !important;
+}
 
 .breads-logo {
     display: block;
@@ -109,8 +112,8 @@ nav ul {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 100vh;
     width: 100%;
+    overflow: auto;
 }
 
 .chatbot-container {
@@ -119,8 +122,9 @@ nav ul {
     justify-content: center;
     align-items: center;
     background: transparent;
-    margin: 3em;
     z-index: 2;
+    min-height: 100vh;
+    margin-bottom: 3rem;
 }
 
 .bot-img-bg {
@@ -128,6 +132,7 @@ nav ul {
     align-items: center;
     justify-content: center;
     background-color: #661515;
+    box-shadow: 0 0 10px var(--font);
     border-radius: 50%;
     aspect-ratio: 1;
     width: 50%;
@@ -149,6 +154,7 @@ nav ul {
     border-radius: 3rem;
     background-color: #00000000;
     border: 1px solid #661515;
+    box-shadow: 0 0 5px var(--primary) !important;
     padding: 0.5em 1em;
     font-size: var(--font-medium);
     font-weight: 500;
@@ -164,11 +170,11 @@ nav ul {
 }
 
 .description-container {
-    height: 100%;
-    max-height: 38%;
     padding-top: 0;
     z-index: 0;
     position: relative;
+    background-color: var(--primary);
+    padding-bottom: 2rem;
 }
 
 .wave-container{
@@ -177,6 +183,7 @@ nav ul {
     z-index: -1;
     background: transparent;
     position: relative;
+    
 }
 .wave-container > img{
     display: block;
@@ -188,16 +195,26 @@ nav ul {
 }
 
 .description {
-    color: var(--secondary);
-    background-color: #661515;
+    color: var(--font);
+    background-color: var(--secondary);
     align-self: center;
     text-align: center;
-    padding: 1em;
-    padding-bottom: 6rem;
+    vertical-align: middle;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem;
     position: relative;
     z-index: 2;
+    width: 80%;
+    margin: 0 auto;
     margin-top: 0;
     font-size: var(--font-medium) !important;
+    border-radius: 1rem;  
+    box-shadow: 0 0 1px hsl(0deg 0% 0% / 0.075), 0 0 2px hsl(0deg 0% 0% / 0.075),
+    0 0 4px hsl(0deg 0% 0% / 0.075), 0 0 8px hsl(0deg 0% 0% / 0.075),
+    0 0 16px hsl(0deg 0% 0% / 0.075);
+  transform-origin: 10% 60%;
 }
 
 
@@ -326,7 +343,6 @@ nav ul {
 
 /* Body ends */
 .menu-open {
-    transition-property: all;
     background-color: #2f2f2f;
     color: rgba(255, 0, 0, 0);
     padding: 4em 10em 4em 1.7em;
@@ -346,9 +362,6 @@ nav ul {
     .bot-img-bg{
         max-width: 15rem;
     }
-    .description{
-        padding-bottom: 10rem;
-    }
     .navbar{
         height: 5.5rem;
     }
@@ -361,13 +374,32 @@ nav ul {
     .bot-img{
         max-width: 16rem;
     }
-    .description{
-        padding-bottom: 12rem;
-    }
 }
 @media (min-width: 1024px) {
+    .hamburger-icon{
+        display: none;
+    }
     .navbar{
         height: 7rem;
+    }
+    #menu-content{
+        position: relative;
+    }
+    .menu{
+        width: 100%;
+        padding: 2rem 0rem;
+    }
+    #menu-content ul{
+        display: flex !important;
+        justify-content: space-evenly;
+        gap: 1rem;
+        padding: 0 2rem;
+        margin: 0;
+        font-size: var(--font-small);
+        width: 100%;
+    }
+    #menu-content li a{
+        color: black;
     }
 }
 

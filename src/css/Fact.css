@@ -35,3 +35,6 @@
     margin-left: 50px;
     margin-right: 50px;
 }
+.new-div > h4{
+  font-size: var(--font-small);
+}

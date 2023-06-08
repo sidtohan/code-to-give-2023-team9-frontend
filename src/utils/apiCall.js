@@ -20,6 +20,20 @@ export const fetchQuestions = async (formID) => {
     }
     navigator[quesList[ques].id] = quesList[ques];
   }
-  console.log(navigator);
   return { start, navigator };
+};
+
+export const submitReponse = async (userInfo, formID) => {
+  // Logic for submitting form
+  await axios.post(
+    url + "/submit",
+    {
+      response: userInfo,
+    },
+    {
+      params: {
+        formID,
+      },
+    }
+  );
 };

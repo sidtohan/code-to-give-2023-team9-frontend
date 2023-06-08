@@ -4,7 +4,7 @@ import ChatHeader from "../components/ChatHeader";
 import ChatMessageHolder from "../components/ChatMessageHolder";
 import ChatForm from "../components/ChatForm";
 import { useNavigate } from "react-router-dom";
-import { fetchQuestions } from "../utils/apiCall";
+import { fetchQuestions, submitReponse } from "../utils/apiCall";
 
 export default function Chat() {
   // Page for Chat
@@ -31,10 +31,11 @@ export default function Chat() {
     messageHolderRef.current.scrollTop = messageHolderRef.current.scrollHeight;
     if (question.nextLink === null) {
       // Ends here
-      console.log(userInfo);
-      endingPage();
-    }
-    setQuestion(questionList[question.nextLink]);
+      (async () => {
+        await submitReponse(userInfo, "IDtwe0lZDI7dBSeoHOZm");
+        endingPage();
+      })();
+    } else setQuestion(questionList[question.nextLink]);
   }, [messages]);
 
   // Initial Call

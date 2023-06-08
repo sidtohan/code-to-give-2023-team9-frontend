@@ -210,7 +210,7 @@ nav ul {
     margin: 0 auto;
     margin-top: 0;
     font-size: var(--font-medium) !important;
-    border-radius: 2rem;  
+    border-radius: 1rem;  
     box-shadow: 0 0 1px hsl(0deg 0% 0% / 0.075), 0 0 2px hsl(0deg 0% 0% / 0.075),
     0 0 4px hsl(0deg 0% 0% / 0.075), 0 0 8px hsl(0deg 0% 0% / 0.075),
     0 0 16px hsl(0deg 0% 0% / 0.075);
@@ -373,9 +373,6 @@ nav ul {
     }
     .bot-img{
         max-width: 16rem;
-    }
-    .description{
-        padding-bottom: 12rem;
     }
 }
 @media (min-width: 1024px) {

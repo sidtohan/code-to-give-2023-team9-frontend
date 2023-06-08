@@ -2,6 +2,7 @@
 :root{
   --primary: #661515;
   --secondary: #faf9f1;
+  --font: #2f2f2f;
   --font-fam: "Quicksand", -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
   'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
   sans-serif;

@@ -23,7 +23,10 @@ function ChatOption({
       if (question.type === "single-correct") {
         // Modify next of question
         // that is needed for the single correct question
-        setQuestion({ ...question, nextLink: option.next });
+        setQuestion({
+          ...question,
+          nextLink: option.next ? option.next["_path"].segments[3] : null,
+        });
       }
     } else {
       const newAnswers = [...answers];
@@ -64,7 +67,7 @@ const ChatFormOptions = ({ question, answers, setAnswers, setQuestion }) => {
           <ChatOption
             question={question}
             setQuestion={setQuestion}
-            key={`${question.question}${i}`}
+            key={`${question.key}${i}`}
             option={option}
             index={i}
             answers={answers}

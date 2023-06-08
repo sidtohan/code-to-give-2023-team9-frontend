@@ -2,13 +2,32 @@ import "../css/ChatForm.css";
 import { useRef, useState } from "react";
 import ChatFormBot from "./ChatFormBot";
 
-function ChatOption({ option, index, answers, setAnswers, optionLimit }) {
+function ChatOption({
+  option,
+  index,
+  answers,
+  setAnswers,
+  optionLimit,
+  question,
+  setQuestion,
+}) {
   const [checked, setChecked] = useState(false);
   const labelRef = useRef();
   const handleChange = () => {
     if (checked === false) {
-      const newAnswers = [...answers, option.option];
+      const newAnswers = [
+        ...answers,
+        question.type === "single-correct" ? option.option : option,
+      ];
       setAnswers(newAnswers);
+      if (question.type === "single-correct") {
+        // Modify next of question
+        // that is needed for the single correct question
+        setQuestion({
+          ...question,
+          nextLink: option.next ? option.next["_path"].segments[3] : null,
+        });
+      }
     } else {
       const newAnswers = [...answers];
       newAnswers.pop();
@@ -35,18 +54,20 @@ function ChatOption({ option, index, answers, setAnswers, optionLimit }) {
         onChange={handleChange}
         disabled={checked === false && answers.length >= optionLimit}
       />
-      {option.option}
+      {question.type === "single-correct" ? option.option : option}
     </label>
   );
 }
-const ChatFormOptions = ({ question, answers, setAnswers }) => {
+const ChatFormOptions = ({ question, answers, setAnswers, setQuestion }) => {
   const optionLimit = question.type === "multi-correct" ? 5 : 1;
   return (
     <div className="option-list">
       {question.options.map((option, i) => {
         return (
           <ChatOption
-            key={`${question.question}${i}`}
+            question={question}
+            setQuestion={setQuestion}
+            key={`${question.key}${i}`}
             option={option}
             index={i}
             answers={answers}
@@ -59,8 +80,8 @@ const ChatFormOptions = ({ question, answers, setAnswers }) => {
   );
 };
 const ChatFormSlider = ({ question, setAnswers }) => {
-  const minVal = question.min;
-  const maxVal = question.max;
+  const minVal = question.minLength;
+  const maxVal = question.maxLength;
   const [value, setValue] = useState(0);
   const handleChange = (e) => {
     setValue(e.target.value);
@@ -104,11 +125,13 @@ const ChatFormText = ({ setAnswers }) => {
     </label>
   );
 };
-const RenderQuestion = ({ question, answers, setAnswers, submitForm }) => {
+const RenderQuestion = ({ question, answers, setAnswers, setQuestion }) => {
+  if (!question) return <></>;
   if (question.type === "multi-correct" || question.type === "single-correct")
     return (
       <ChatFormOptions
         question={question}
+        setQuestion={setQuestion}
         answers={answers}
         setAnswers={setAnswers}
       />
@@ -119,6 +142,7 @@ const RenderQuestion = ({ question, answers, setAnswers, submitForm }) => {
 };
 export default function ChatForm({
   question,
+  setQuestion,
   messages,
   setMessages,
   userInfo,
@@ -150,6 +174,7 @@ export default function ChatForm({
       <form onSubmit={submitForm}>
         <RenderQuestion
           question={question}
+          setQuestion={setQuestion}
           answers={answers}
           setAnswers={setAnswers}
           submitForm={submitForm}

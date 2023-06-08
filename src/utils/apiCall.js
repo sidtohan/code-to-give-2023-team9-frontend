@@ -23,7 +23,7 @@ export const fetchQuestions = async (formID) => {
   return { start, navigator };
 };
 
-export const submitReponse = async (userInfo, formID) => {
+export const submitResponse = async (userInfo, formID) => {
   // Logic for submitting form
   await axios.post(
     url + "/submit",

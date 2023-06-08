@@ -80,8 +80,8 @@ const ChatFormOptions = ({ question, answers, setAnswers, setQuestion }) => {
   );
 };
 const ChatFormSlider = ({ question, setAnswers }) => {
-  const minVal = question.min;
-  const maxVal = question.max;
+  const minVal = question.minLength;
+  const maxVal = question.maxLength;
   const [value, setValue] = useState(0);
   const handleChange = (e) => {
     setValue(e.target.value);

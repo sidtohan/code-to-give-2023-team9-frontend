@@ -31,6 +31,7 @@ export default function Chat({ variants, language }) {
   const [userInfo, setUserInfo] = useState({});
   const [answers, setAnswers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [prevText, setPrevText] = useState("");
   const messageHolderRef = useRef();
   const endingPage = () => navigate("/ending");
 
@@ -58,7 +59,6 @@ export default function Chat({ variants, language }) {
             nextQ.type === "single-correct"
           ) {
             nextQ.options = [];
-            console.log(questionList[question.nextLink]);
             if (nextQ.type === "multi-correct") {
               for (let option in questionList[question.nextLink].options) {
                 nextQ.options.push(
@@ -76,7 +76,7 @@ export default function Chat({ variants, language }) {
             }
           }
           const responseData = {
-            text: question.text[language],
+            text: prevText,
             type: question.type,
           };
           if (question.type === "multi-correct") {
@@ -102,7 +102,10 @@ export default function Chat({ variants, language }) {
           }
           nextQ.prevData = responseData;
           const newQuestion = await gptCall(nextQ);
-          questionList[question.nextLink].text[language] = newQuestion;
+          setPrevText(questionList[question.nextLink].text[language]);
+          questionList[question.nextLink].text[language] = !newQuestion
+            ? questionList[question.nextLink].text[language]
+            : newQuestion;
           setQuestion(questionList[question.nextLink]);
           setAnswers([]);
           setLoading(false);

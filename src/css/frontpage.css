@@ -42,6 +42,7 @@ body {
     outline: red 5px;
     transition: 0.3s ease;
     position: absolute;
+    border-radius: 3rem;
     left: 50%;
     transform: translateX(-50%);
 }
@@ -76,11 +77,20 @@ body {
     position: absolute;
 }
 
-nav ul {
-    padding: 0;
-    margin: 0 10px;
-    transition: 1s ease;
-    display: none;
+nav ul {    
+    background-color: #2f2f2f;
+    color: rgba(255, 0, 0, 0);
+    padding: 4em 10em 4em 1.7em;
+    margin: 0;
+    font-size: var(--font-medium);
+    top: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    transition: 0.15s ease-in-out;
+    border-radius: 0em 0em 20em 0em;
+    transform: scale(0);
+    transform-origin: top left;
 }
 .navbar li {
     list-style: none;
@@ -93,7 +103,7 @@ nav ul {
     transition: 0.3s ease-in-out;
 }
 .navbar li a:hover{
-    color: var(--primary) !important;
+    color: #fff;
 }
 
 .breads-logo {
@@ -343,17 +353,7 @@ nav ul {
 
 /* Body ends */
 .menu-open {
-    background-color: #2f2f2f;
-    color: rgba(255, 0, 0, 0);
-    padding: 4em 10em 4em 1.7em;
-    margin: 0;
-    font-size: var(--font-medium);
-    top: 0;
-    z-index: 100;
-    display: flex;
-    flex-direction: column;
-    transition: 1s ease;
-    border-radius: 0em 0em 20em 0em;
+    transform: scale(1);
 }
 
 /* Responsive Horizontal */
@@ -390,8 +390,11 @@ nav ul {
         padding: 2rem 0rem;
     }
     #menu-content ul{
+        transform: scale(1);
+        background-color: transparent;
         display: flex !important;
         justify-content: space-evenly;
+        flex-direction: row;
         gap: 1rem;
         padding: 0 2rem;
         margin: 0;
@@ -400,6 +403,9 @@ nav ul {
     }
     #menu-content li a{
         color: black;
+    }
+    .navbar li a:hover{
+        color: var(--primary) !important;
     }
 }
 

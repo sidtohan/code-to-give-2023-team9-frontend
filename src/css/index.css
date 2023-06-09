@@ -14,6 +14,7 @@
   --font-medium: 22px;
   --font-large: 26px;
   --font-xl: 36px;
+  overflow-x: hidden;
 }
 body {
   margin: 0;

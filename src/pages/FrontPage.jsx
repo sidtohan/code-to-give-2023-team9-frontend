@@ -1,12 +1,40 @@
 import "../css/frontpage.css";
+import "swiper/css";
 import React, { useEffect, useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Navigation, Autoplay } from "swiper";
 import { animate, motion } from "framer-motion";
 import Wave from "../assets/wave.svg";
 import { Link, Route } from "react-router-dom";
 
 import BotImage from "../assets/Bot.svg";
+
+function TestimonialSlider({ testimonials }) {
+  return (
+    <Swiper
+      spaceBetween={50}
+      slidesPerView={1}
+      modules={[Navigation, Pagination, Autoplay]}
+      navigation
+      pagination={{ clickable: true }}
+      scrollbar={{ clickable: true }}
+      autoplay={{ delay: 3000 }}
+      className="testimonial-holder"
+    >
+      {testimonials.map((testimonial, i) => {
+        return (
+          <SwiperSlide className="testimonial" key={`test${i}`}>
+            <p className="testimonial-description">{testimonial.description}</p>
+            <h3 className="testimonial-name">{testimonial.name}</h3>
+          </SwiperSlide>
+        );
+      })}
+    </Swiper>
+  );
+}
+
 const menu = document.getElementById("#menu");
-function FrontPage({ variants }) {
+function FrontPage({ variants, testimonials }) {
   const [isActive, setActive] = useState("false");
   const ToggleClass = () => {
     setActive(!isActive);
@@ -144,7 +172,7 @@ function FrontPage({ variants }) {
           className="description-container"
         >
           <motion.h2
-            className="description-heading"
+            className="heading"
             variants={{
               offscreen: {
                 x: 30,
@@ -173,6 +201,35 @@ function FrontPage({ variants }) {
           </motion.p>
         </motion.div>
       </div>
+      <div className="wave-container reverse">
+        <img src={Wave} alt="Wave" />
+      </div>
+      <motion.div
+        initial="offscreen"
+        whileInView="onscreen"
+        viewport={{
+          once: false,
+          amount: 0.5,
+        }}
+        className="testimonials"
+      >
+        <motion.h2
+          variants={{
+            offscreen: {
+              x: 30,
+              opacity: 0,
+            },
+            onscreen: {
+              x: 0,
+              opacity: 1,
+            },
+          }}
+          className="heading"
+        >
+          TESTIMONIALS
+        </motion.h2>
+        <TestimonialSlider testimonials={testimonials} />
+      </motion.div>
     </motion.div>
   );
 }

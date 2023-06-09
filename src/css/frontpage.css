@@ -124,6 +124,7 @@ nav ul {
     justify-content: center;
     width: 100%;
     overflow: auto;
+    overflow-x: hidden;
 }
 
 .chatbot-container {
@@ -156,8 +157,9 @@ nav ul {
 
 .bot-intro {
     text-align: center;
-    font-size: var(--font-xl);
+    font-size: var(--font-large);
     font-weight: 600;
+    padding: 0 1rem;
 }
 
 .chat-button {
@@ -192,8 +194,10 @@ nav ul {
     height: 20vw;
     z-index: -1;
     background: transparent;
-    position: relative;
-    
+    position: relative;   
+}
+.wave-container.reverse{
+    transform: rotate(180deg);
 }
 .wave-container > img{
     display: block;
@@ -203,7 +207,7 @@ nav ul {
     left: 50%;
     transform: translateX(-50%);
 }
-.description-heading{
+.heading{
     color: #fff;
     font-weight: 700;
     font-size: 4rem;
@@ -212,6 +216,7 @@ nav ul {
     padding-bottom: 4rem;
     font-family: var(--font-fam-heading);
     letter-spacing: 0.4rem;
+    overflow-wrap:break-word;
 }
 .description {
     color: #fff;
@@ -236,7 +241,49 @@ nav ul {
   transform-origin: 10% 60%;
 }
 
+/* Testimonials Heading */
+.testimonials{
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 5rem;
+}
+.testimonials > .heading{
+    color: var(--primary);
+}
 
+.testimonial-holder{
+    display: flex;
+    justify-content: stretch;
+    align-items: stretch;
+    width: 90%;
+    max-width: 40rem;
+    padding: 4rem 2rem !important;
+}
+.testimonial{
+    font-size: var(--font-medium);
+    box-shadow: -0.1rem 0.1rem 1rem grey !important;
+    padding: 2rem;
+    border-radius: 1rem;
+    align-self: strech;
+}
+.testimonial-description{
+    text-align: center;
+}
+.testimonial-name{
+    text-align: center;
+    position: relative;
+    padding-top: 1rem;
+}
+.testimonial-name::before{
+    content: "";
+    width: 50%;
+    position: absolute;
+    height: 2px;
+    left: 50%;
+    bottom: 100%;
+    transform: translateX(-50%);
+    background-color: var(--primary);
+}
 /* 
 @media (min-height:1000px) {
     .bot-intro{

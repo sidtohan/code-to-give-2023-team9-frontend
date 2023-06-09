@@ -7,6 +7,23 @@ import Chat from "./pages/Chat";
 import EndingPage from "./pages/EndingPage";
 
 function App() {
+  const testimonials = [
+    {
+      name: "Siddhant",
+      description:
+        "DREAM enabled me to be a better version of myself. At first I was afraid, but the kindness of everyone got through to me and I was successfully able to overcome my addiction",
+    },
+    {
+      name: "Rohit",
+      description:
+        "Thanks to DREAM, I transformed into an improved version of myself. Initially filled with fear, the compassion of those around me broke through, empowering me to conquer my addiction effectively.",
+    },
+    {
+      name: "Ravi",
+      description:
+        "DREAM empowered me to become an improved version of who I am. Initially, fear gripped me, but the compassion of those around me resonated deeply, enabling me to triumph over my addiction.",
+    },
+  ];
   const variants = {
     initial: {
       opacity: 0,
@@ -30,7 +47,13 @@ function App() {
           <Route
             exact
             path="/"
-            element={<FrontPage variants={variants} language={language} />}
+            element={
+              <FrontPage
+                variants={variants}
+                language={language}
+                testimonials={testimonials}
+              />
+            }
           />
           <Route
             exact

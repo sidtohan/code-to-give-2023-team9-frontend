@@ -75,9 +75,13 @@ export default function Chat({ variants }) {
           setLoading(false);
         })();
       } else {
-        setQuestion(nextQ);
-        setAnswers([]);
-        setLoading(false);
+        (async () => {
+          const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+          setQuestion(nextQ);
+          setAnswers([]);
+          await delay(500);
+          setLoading(false);
+        })();
       }
     }
   }, [messages]);

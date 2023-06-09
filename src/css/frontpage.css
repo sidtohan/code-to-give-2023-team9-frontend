@@ -463,10 +463,20 @@ nav ul {
     .navbar li a:hover{
         color: var(--primary) !important;
     }
+    .description-container{
+        display: flex;
+        align-items: center;
+        gap: 10vw;
+    }
     .description{
-        padding-left: 12vw;
-        padding-right: 12vw;
-        height: 80vh;
+        height: 60vh;
+    }
+    .testimonials{
+        padding: 5rem;
+        padding-top: 10rem;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
     }
 }
 

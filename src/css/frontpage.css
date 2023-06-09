@@ -205,8 +205,8 @@ nav ul {
 }
 
 .description {
-    color: var(--font);
-    background-color: var(--secondary);
+    color: #fff;
+    background-color:#901E1E;
     align-self: center;
     text-align: center;
     vertical-align: middle;
@@ -406,6 +406,11 @@ nav ul {
     }
     .navbar li a:hover{
         color: var(--primary) !important;
+    }
+    .description{
+        padding-left: 12vw;
+        padding-right: 12vw;
+        height: 80vh;
     }
 }
 

@@ -1,6 +1,12 @@
 import axios from "axios";
 const url = process.env.URL || "http://localhost:3000";
 
+export const gptCall = async (prevQuestion) => {
+  // Send question to GPT
+  const sendObject = { ...prevQuestion };
+  const modifiedQues = await axios.post(url + "/gpt", sendObject);
+  return modifiedQues.data.modifiedQues;
+};
 export const fetchQuestions = async (formID) => {
   // Add logic for fetching from API here
   let quesList = await axios.get(url + "/form", {
@@ -20,6 +26,7 @@ export const fetchQuestions = async (formID) => {
     }
     navigator[quesList[ques].id] = quesList[ques];
   }
+  console.log(navigator);
   return { start, navigator };
 };
 

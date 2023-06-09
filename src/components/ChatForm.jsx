@@ -1,6 +1,7 @@
 import "../css/ChatForm.css";
 import { useRef, useState } from "react";
 import ChatFormBot from "./ChatFormBot";
+import Loader from "./Loader";
 
 function ChatOption({
   option,
@@ -10,15 +11,17 @@ function ChatOption({
   optionLimit,
   question,
   setQuestion,
+  language,
 }) {
   const [checked, setChecked] = useState(false);
   const labelRef = useRef();
+  const val =
+    question.type === "multi-correct"
+      ? option[language]
+      : option.option[language];
   const handleChange = () => {
     if (checked === false) {
-      const newAnswers = [
-        ...answers,
-        question.type === "single-correct" ? option.option : option,
-      ];
+      const newAnswers = [...answers, val];
       setAnswers(newAnswers);
       if (question.type === "single-correct") {
         // Modify next of question
@@ -30,7 +33,7 @@ function ChatOption({
       }
     } else {
       const newAnswers = [...answers];
-      newAnswers.pop();
+      newAnswers.splice(newAnswers.indexOf(val), 1);
       setAnswers(newAnswers);
     }
     labelRef.current.classList.toggle("invert");
@@ -54,11 +57,19 @@ function ChatOption({
         onChange={handleChange}
         disabled={checked === false && answers.length >= optionLimit}
       />
-      {question.type === "single-correct" ? option.option : option}
+      {question.type === "single-correct"
+        ? option.option[language]
+        : option[language]}
     </label>
   );
 }
-const ChatFormOptions = ({ question, answers, setAnswers, setQuestion }) => {
+const ChatFormOptions = ({
+  question,
+  answers,
+  setAnswers,
+  setQuestion,
+  language,
+}) => {
   const optionLimit = question.type === "multi-correct" ? 5 : 1;
   return (
     <div className="option-list">
@@ -73,6 +84,7 @@ const ChatFormOptions = ({ question, answers, setAnswers, setQuestion }) => {
             answers={answers}
             setAnswers={setAnswers}
             optionLimit={optionLimit}
+            language={language}
           />
         );
       })}
@@ -125,7 +137,13 @@ const ChatFormText = ({ setAnswers }) => {
     </label>
   );
 };
-const RenderQuestion = ({ question, answers, setAnswers, setQuestion }) => {
+const RenderQuestion = ({
+  question,
+  answers,
+  setAnswers,
+  setQuestion,
+  language,
+}) => {
   if (!question) return <></>;
   if (question.type === "multi-correct" || question.type === "single-correct")
     return (
@@ -134,6 +152,7 @@ const RenderQuestion = ({ question, answers, setAnswers, setQuestion }) => {
         setQuestion={setQuestion}
         answers={answers}
         setAnswers={setAnswers}
+        language={language}
       />
     );
   else if (question.type === "slider")
@@ -147,16 +166,20 @@ export default function ChatForm({
   setMessages,
   userInfo,
   setUserInfo,
+  answers,
+  setAnswers,
+  loading,
+  language,
 }) {
-  const [answers, setAnswers] = useState([]);
   const submitForm = (e) => {
     e.preventDefault();
     if (answers.length === 0) return;
+    const newAnswers = [...answers];
     const newMessages = [
       ...messages,
       {
-        question: question.text,
-        answers: answers,
+        question: question.text[language],
+        answers: newAnswers,
       },
     ];
     const key = question.key;
@@ -165,22 +188,30 @@ export default function ChatForm({
     else newUserInfo[key] = answers[0];
     setUserInfo(newUserInfo);
     setMessages(newMessages);
-    setAnswers([]);
   };
 
   return (
     <section className="chat-form">
-      <h2 className="form-heading">{question ? question.text : ""}</h2>
-      <form onSubmit={submitForm}>
-        <RenderQuestion
-          question={question}
-          setQuestion={setQuestion}
-          answers={answers}
-          setAnswers={setAnswers}
-          submitForm={submitForm}
-        />
-      </form>
-      <ChatFormBot submitForm={submitForm} answers={answers} />
+      {loading === true ? (
+        <Loader />
+      ) : (
+        <>
+          <h2 className="form-heading">
+            {question ? question.text[language] : ""}
+          </h2>
+          <form onSubmit={submitForm}>
+            <RenderQuestion
+              question={question}
+              setQuestion={setQuestion}
+              answers={answers}
+              setAnswers={setAnswers}
+              submitForm={submitForm}
+              language={language}
+            />
+          </form>
+          <ChatFormBot submitForm={submitForm} answers={answers} />
+        </>
+      )}
     </section>
   );
 }

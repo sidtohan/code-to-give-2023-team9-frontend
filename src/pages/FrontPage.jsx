@@ -139,11 +139,32 @@ function FrontPage({ variants }) {
           whileInView="onscreen"
           viewport={{
             once: false,
-            amount: 0.8,
+            amount: 0.5,
           }}
           className="description-container"
         >
-          <motion.p variants={descriptionVariant} className="description">
+          <motion.h2
+            className="description-heading"
+            variants={{
+              offscreen: {
+                x: 30,
+                opacity: 0,
+              },
+              onscreen: {
+                x: 0,
+                opacity: 1,
+              },
+            }}
+          >
+            IT'S OKAY TO DREAM
+          </motion.h2>
+          <motion.p
+            variants={descriptionVariant}
+            transition={{
+              delay: 1,
+            }}
+            className="description"
+          >
             Drug Rehabilitation Education and Mentoring (DREAM) is a
             rights-based initiative of BREADS started in November 2021, which
             aims to empower lakhs of children and youth to dream beyond drugs.

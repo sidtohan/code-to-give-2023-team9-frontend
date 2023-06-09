@@ -156,7 +156,7 @@ nav ul {
 
 .bot-intro {
     text-align: center;
-    font-size: var(--font-large);
+    font-size: var(--font-xl);
     font-weight: 600;
 }
 
@@ -203,7 +203,16 @@ nav ul {
     left: 50%;
     transform: translateX(-50%);
 }
-
+.description-heading{
+    color: #fff;
+    font-weight: 700;
+    font-size: 4rem;
+    text-align: center;
+    padding: 0 2rem;
+    padding-bottom: 4rem;
+    font-family: var(--font-fam-heading);
+    letter-spacing: 0.4rem;
+}
 .description {
     color: #fff;
     background-color:#901E1E;

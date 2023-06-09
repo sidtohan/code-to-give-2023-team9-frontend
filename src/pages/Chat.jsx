@@ -5,10 +5,11 @@ import ChatHeader from "../components/ChatHeader";
 import ChatMessageHolder from "../components/ChatMessageHolder";
 import ChatForm from "../components/ChatForm";
 import { useNavigate } from "react-router-dom";
-import { fetchQuestions, submitResponse } from "../utils/apiCall";
+import { fetchQuestions, gptCall, submitResponse } from "../utils/apiCall";
 
 export default function Chat({ variants }) {
   // Page for Chat
+  // States and Constants
   const navigate = useNavigate();
   const [messages, setMessages] = useState([
     {
@@ -16,14 +17,20 @@ export default function Chat({ variants }) {
       answers: ["Alright"],
     },
   ]);
-  const [questionList, setQuestionList] = useState({});
   const [question, setQuestion] = useState({
     text: "Welcome to the Chat. Select the below option to begin",
     type: "option",
     options: ["Yes"],
-    next: 1,
+    nextLink: 1,
+    isModifiable: false,
+  });
+
+  const [questionList, setQuestionList] = useState({
+    1: question,
   });
   const [userInfo, setUserInfo] = useState({});
+  const [answers, setAnswers] = useState([]);
+  const [loading, setLoading] = useState(true);
   const messageHolderRef = useRef();
   const endingPage = () => navigate("/ending");
 
@@ -36,15 +43,53 @@ export default function Chat({ variants }) {
         await submitResponse(userInfo, "IDtwe0lZDI7dBSeoHOZm");
         endingPage();
       })();
-    } else setQuestion(questionList[question.nextLink]);
+    } else {
+      setLoading(true);
+      const nextQ = questionList[question.nextLink];
+      if (nextQ.isModifiable === true) {
+        (async () => {
+          const responseData = {
+            text: question.text,
+            type: question.type,
+          };
+          if (question.type === "multi-correct") {
+            responseData.options = question.options;
+            responseData.response = answers;
+          } else if (question.type === "single-correct") {
+            responseData.options = [];
+            for (let option in question.options) {
+              responseData.options.append(question.options[option].option);
+            }
+            responseData.response = answers[0];
+          } else if (question.type === "text") {
+            responseData.response = answers[0];
+          } else {
+            responseData.minLength = question.minLength;
+            responseData.maxLength = question.maxLength;
+            responseData.response = answers[0];
+          }
+          const newQuestion = await gptCall(responseData);
+          nextQ.text = newQuestion.text;
+          setQuestion(nextQ);
+          setAnswers([]);
+          setLoading(false);
+        })();
+      } else {
+        setQuestion(nextQ);
+        setAnswers([]);
+        setLoading(false);
+      }
+    }
   }, [messages]);
 
   // Initial Call
   useEffect(() => {
     (async () => {
+      setLoading(true);
       const { start, navigator } = await fetchQuestions("IDtwe0lZDI7dBSeoHOZm");
       setQuestionList(navigator);
       setQuestion(navigator[start]);
+      setLoading(false);
     })();
     return () => {
       // anything like loading etc
@@ -72,6 +117,9 @@ export default function Chat({ variants }) {
         messageHolderRef={messageHolderRef}
         userInfo={userInfo}
         setUserInfo={setUserInfo}
+        answers={answers}
+        setAnswers={setAnswers}
+        loading={loading}
       />
     </motion.div>
   );

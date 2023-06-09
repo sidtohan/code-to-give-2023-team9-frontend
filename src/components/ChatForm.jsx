@@ -1,6 +1,7 @@
 import "../css/ChatForm.css";
 import { useRef, useState } from "react";
 import ChatFormBot from "./ChatFormBot";
+import Loader from "./Loader";
 
 function ChatOption({
   option,
@@ -147,8 +148,10 @@ export default function ChatForm({
   setMessages,
   userInfo,
   setUserInfo,
+  answers,
+  setAnswers,
+  loading,
 }) {
-  const [answers, setAnswers] = useState([]);
   const submitForm = (e) => {
     e.preventDefault();
     if (answers.length === 0) return;
@@ -165,22 +168,27 @@ export default function ChatForm({
     else newUserInfo[key] = answers[0];
     setUserInfo(newUserInfo);
     setMessages(newMessages);
-    setAnswers([]);
   };
 
   return (
     <section className="chat-form">
-      <h2 className="form-heading">{question ? question.text : ""}</h2>
-      <form onSubmit={submitForm}>
-        <RenderQuestion
-          question={question}
-          setQuestion={setQuestion}
-          answers={answers}
-          setAnswers={setAnswers}
-          submitForm={submitForm}
-        />
-      </form>
-      <ChatFormBot submitForm={submitForm} answers={answers} />
+      {loading === true ? (
+        <Loader />
+      ) : (
+        <>
+          <h2 className="form-heading">{question ? question.text : ""}</h2>
+          <form onSubmit={submitForm}>
+            <RenderQuestion
+              question={question}
+              setQuestion={setQuestion}
+              answers={answers}
+              setAnswers={setAnswers}
+              submitForm={submitForm}
+            />
+          </form>
+          <ChatFormBot submitForm={submitForm} answers={answers} />
+        </>
+      )}
     </section>
   );
 }

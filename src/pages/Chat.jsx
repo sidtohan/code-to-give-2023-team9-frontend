@@ -7,7 +7,7 @@ import ChatForm from "../components/ChatForm";
 import { useNavigate } from "react-router-dom";
 import { fetchQuestions, gptCall, submitResponse } from "../utils/apiCall";
 
-export default function Chat({ variants }) {
+export default function Chat({ variants, language }) {
   // Page for Chat
   // States and Constants
   const navigate = useNavigate();
@@ -40,25 +40,57 @@ export default function Chat({ variants }) {
     if (question.nextLink === null) {
       // Ends here
       (async () => {
-        await submitResponse(userInfo, "IDtwe0lZDI7dBSeoHOZm");
+        await submitResponse(userInfo, "ZSPZlxOBzx7gFrcGlIwM");
         endingPage();
       })();
     } else {
       setLoading(true);
-      const nextQ = questionList[question.nextLink];
-      if (nextQ.isModifiable === true) {
+      const nextQ = { ...questionList[question.nextLink] };
+      if (language === "english" && nextQ.isModifiable === true) {
         (async () => {
+          delete nextQ["next"];
+          delete nextQ["nextLink"];
+          delete nextQ["key"];
+          delete nextQ["required"];
+          nextQ.text = nextQ.text[language];
+          if (
+            nextQ.type === "multi-correct" ||
+            nextQ.type === "single-correct"
+          ) {
+            nextQ.options = [];
+            console.log(questionList[question.nextLink]);
+            if (nextQ.type === "multi-correct") {
+              for (let option in questionList[question.nextLink].options) {
+                nextQ.options.push(
+                  questionList[question.nextLink].options[option][language]
+                );
+              }
+            } else {
+              for (let option in questionList[question.nextLink].options) {
+                nextQ.options.push(
+                  questionList[question.nextLink].options[option].option[
+                    language
+                  ]
+                );
+              }
+            }
+          }
           const responseData = {
-            text: question.text,
+            text: question.text[language],
             type: question.type,
           };
           if (question.type === "multi-correct") {
-            responseData.options = question.options;
+            responseData.options = [];
+            for (let option in question.options) {
+              responseData.options.push(question.options[option][language]);
+            }
             responseData.response = answers;
           } else if (question.type === "single-correct") {
             responseData.options = [];
             for (let option in question.options) {
-              responseData.options.append(question.options[option].option);
+              responseData.options.push(
+                question.options[option].option[language]
+              );
             }
             responseData.response = answers[0];
           } else if (question.type === "text") {
@@ -68,9 +100,10 @@ export default function Chat({ variants }) {
             responseData.maxLength = question.maxLength;
             responseData.response = answers[0];
           }
-          const newQuestion = await gptCall(responseData);
-          nextQ.text = newQuestion.text;
-          setQuestion(nextQ);
+          nextQ.prevData = responseData;
+          const newQuestion = await gptCall(nextQ);
+          questionList[question.nextLink].text[language] = newQuestion;
+          setQuestion(questionList[question.nextLink]);
           setAnswers([]);
           setLoading(false);
         })();
@@ -90,7 +123,7 @@ export default function Chat({ variants }) {
   useEffect(() => {
     (async () => {
       setLoading(true);
-      const { start, navigator } = await fetchQuestions("IDtwe0lZDI7dBSeoHOZm");
+      const { start, navigator } = await fetchQuestions("ZSPZlxOBzx7gFrcGlIwM");
       setQuestionList(navigator);
       setQuestion(navigator[start]);
       setLoading(false);
@@ -124,6 +157,7 @@ export default function Chat({ variants }) {
         answers={answers}
         setAnswers={setAnswers}
         loading={loading}
+        language={language}
       />
     </motion.div>
   );

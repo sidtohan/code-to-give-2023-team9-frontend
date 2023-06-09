@@ -1,13 +1,11 @@
 import axios from "axios";
 const url = process.env.URL || "http://localhost:3000";
 
-export const gptCall = async ({ prevQuestion }) => {
+export const gptCall = async (prevQuestion) => {
   // Send question to GPT
-  const modifiedQues = await axios.post(url + "gpt", {
-    ...prevQuestion,
-  });
-  console.log(modifiedQues);
-  return modifiedQues.data;
+  const sendObject = { ...prevQuestion };
+  const modifiedQues = await axios.post(url + "/gpt", sendObject);
+  return modifiedQues.data.modifiedQues;
 };
 export const fetchQuestions = async (formID) => {
   // Add logic for fetching from API here

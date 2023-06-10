@@ -1,10 +1,11 @@
 .chat-message-holder{
     padding: 0rem 1.25rem;
-    padding-top: 7rem;
+    padding-top: 2rem;
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
     overflow: scroll;
     height: 40vh;
     scroll-behavior: smooth;
+    padding-bottom: 2rem;
 }

@@ -1,4 +1,4 @@
-.wave {
+.fact {
     /* background-image: url('../Images/Wave.png'); */
     /* background-repeat: no-repeat; */
     /* background-size: cover; */
@@ -8,7 +8,7 @@
     /* margin-top: 50px; */
     /* background-color: #661515; */
     /* border: 2px black solid; */
-
+    background-color: var(--primary);
   }
 
 .inside-box{
@@ -31,10 +31,10 @@
     /* color: black; */
     font-family: 'Quicksand';
     /* border: 2px black solid; */
-    margin-top: 100px;
     margin-left: 50px;
     margin-right: 50px;
 }
-.new-div > h4{
-  font-size: var(--font-small);
+.fact-description{
+  font-size: var(--font-medium);
+  text-align: center;
 }

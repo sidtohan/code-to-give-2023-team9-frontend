@@ -116,7 +116,7 @@ const ChatFormSlider = ({ question, setAnswers }) => {
   );
 };
 
-const ChatFormText = ({ setAnswers }) => {
+const ChatFormText = ({ setAnswers, language }) => {
   const [textInput, setTextInput] = useState("");
 
   const handleTextChange = (e) => {
@@ -131,10 +131,100 @@ const ChatFormText = ({ setAnswers }) => {
         type="text"
         value={textInput}
         onChange={handleTextChange}
-        placeholder="Enter your answer"
+        placeholder={
+          language === "english"
+            ? "Enter your answer"
+            : "നിങ്ങളുടെ ഉത്തരം നൽകുക"
+        }
         className="input-box"
       />
     </label>
+  );
+};
+const DropDownButton = ({
+  option,
+  question,
+  answers,
+  setAnswers,
+  setQuestion,
+  language,
+  optionLimit,
+}) => {
+  const [checked, setChecked] = useState(false);
+  const labelRef = useRef();
+  const val =
+    question.type === "multi-correct"
+      ? option[language]
+      : option.option[language];
+  const handleChange = (e) => {
+    e.preventDefault();
+    if (checked === false) {
+      const newAnswers = [...answers, val];
+      setAnswers(newAnswers);
+      if (question.type === "single-correct") {
+        // Modify next of question
+        // that is needed for the single correct question
+        setQuestion({
+          ...question,
+          nextLink: option.next ? option.next["_path"].segments[3] : null,
+        });
+      }
+    } else {
+      const newAnswers = [...answers];
+      newAnswers.splice(newAnswers.indexOf(val), 1);
+      setAnswers(newAnswers);
+    }
+    labelRef.current.classList.toggle("invert");
+    setChecked(!checked);
+  };
+  return (
+    <button
+      onClick={handleChange}
+      className={
+        "drop-down-button" +
+        (checked === false && answers.length >= optionLimit ? " disabled" : "")
+      }
+      ref={labelRef}
+      disabled={
+        checked === false && answers.length >= optionLimit ? " disabled" : ""
+      }
+    >
+      {option.option[language]}
+    </button>
+  );
+};
+const DropDownOptions = ({
+  question,
+  setQuestion,
+  answers,
+  setAnswers,
+  language,
+}) => {
+  const optionLimit = question.type === "multi-correct" ? 5 : 1;
+  return (
+    <>
+      <h4 className="info">
+        {language === "english"
+          ? "Please scroll to select your option"
+          : "നിങ്ങളുടെ ഓപ്ഷൻ തിരഞ്ഞെടുക്കാൻ സ്ക്രോൾ ചെയ്യുക"}
+      </h4>
+      <div className="drop-down">
+        {question.options.map((option, i) => {
+          return (
+            <DropDownButton
+              key={`dd${question.text[language]}${i}`}
+              option={option}
+              setAnswers={setAnswers}
+              setQuestion={setQuestion}
+              question={question}
+              language={language}
+              optionLimit={optionLimit}
+              answers={answers}
+            />
+          );
+        })}
+      </div>
+    </>
   );
 };
 const RenderQuestion = ({
@@ -145,19 +235,30 @@ const RenderQuestion = ({
   language,
 }) => {
   if (!question) return <></>;
-  if (question.type === "multi-correct" || question.type === "single-correct")
-    return (
-      <ChatFormOptions
-        question={question}
-        setQuestion={setQuestion}
-        answers={answers}
-        setAnswers={setAnswers}
-        language={language}
-      />
-    );
-  else if (question.type === "slider")
+  if (question.type === "multi-correct" || question.type === "single-correct") {
+    if (question.options.length <= 4)
+      return (
+        <ChatFormOptions
+          question={question}
+          setQuestion={setQuestion}
+          answers={answers}
+          setAnswers={setAnswers}
+          language={language}
+        />
+      );
+    else
+      return (
+        <DropDownOptions
+          question={question}
+          setQuestion={setQuestion}
+          setAnswers={setAnswers}
+          language={language}
+          answers={answers}
+        />
+      );
+  } else if (question.type === "slider")
     return <ChatFormSlider question={question} setAnswers={setAnswers} />;
-  else return <ChatFormText setAnswers={setAnswers} />;
+  else return <ChatFormText setAnswers={setAnswers} language={language} />;
 };
 export default function ChatForm({
   question,
@@ -196,10 +297,10 @@ export default function ChatForm({
         <Loader />
       ) : (
         <>
-          <h2 className="form-heading">
-            {question ? question.text[language] : ""}
-          </h2>
           <form onSubmit={submitForm}>
+            <h2 className="form-heading">
+              {question ? question.text[language] : ""}
+            </h2>
             <RenderQuestion
               question={question}
               setQuestion={setQuestion}

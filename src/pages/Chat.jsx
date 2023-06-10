@@ -12,12 +12,7 @@ export default function Chat({ variants, language }) {
   // States and Constants
   const navigate = useNavigate();
   const [chatActive, setChatActive] = useState(false);
-  const [messages, setMessages] = useState([
-    {
-      question: "Hello! Your responses will appear here.",
-      answers: ["Alright"],
-    },
-  ]);
+  const [messages, setMessages] = useState([]);
   const [question, setQuestion] = useState({
     text: "Welcome to the Chat. Select the below option to begin",
     type: "option",

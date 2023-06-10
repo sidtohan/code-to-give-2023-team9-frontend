@@ -116,7 +116,7 @@ const ChatFormSlider = ({ question, setAnswers }) => {
   );
 };
 
-const ChatFormText = ({ setAnswers }) => {
+const ChatFormText = ({ setAnswers, language }) => {
   const [textInput, setTextInput] = useState("");
 
   const handleTextChange = (e) => {
@@ -131,7 +131,11 @@ const ChatFormText = ({ setAnswers }) => {
         type="text"
         value={textInput}
         onChange={handleTextChange}
-        placeholder="Enter your answer"
+        placeholder={
+          language === "english"
+            ? "Enter your answer"
+            : "നിങ്ങളുടെ ഉത്തരം നൽകുക"
+        }
         className="input-box"
       />
     </label>
@@ -247,7 +251,7 @@ const RenderQuestion = ({
       );
   } else if (question.type === "slider")
     return <ChatFormSlider question={question} setAnswers={setAnswers} />;
-  else return <ChatFormText setAnswers={setAnswers} />;
+  else return <ChatFormText setAnswers={setAnswers} language={language} />;
 };
 export default function ChatForm({
   question,

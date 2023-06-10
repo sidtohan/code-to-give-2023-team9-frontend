@@ -84,7 +84,7 @@ nav ul {
     margin: 0;
     font-size: var(--font-medium);
     top: 0;
-    z-index: 100;
+    z-index: 1;
     display: flex;
     flex-direction: column;
     transition: 0.15s ease-in-out;
@@ -128,6 +128,7 @@ nav ul {
 }
 
 .chatbot-container {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -284,6 +285,50 @@ nav ul {
     bottom: 100%;
     transform: translateX(-50%);
     background-color: var(--primary);
+}
+.language-button{
+    background-color: var(--primary);
+    position: absolute;
+    top: 80vh;
+    right: 0.5rem;
+    height: 4rem;
+    width: 4rem;
+    border-radius: 50%;
+    box-shadow: 0 0 3px grey;
+    z-index: 2;
+}
+.language-button > img{
+    position: absolute;
+    width: 60%;
+    height: auto;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.select-language{
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    z-index: 100;
+}
+.set-language{
+    display: block;
+    background: var(--primary);
+    color: var(--secondary);
+    width: 100%;
+    border: 1px solid var(--primary);
+    font-size: var(--font-small);
+    font-family: var(--font-fam);
+    z-index: 100;
+    padding: 1rem;
+    border-radius: 3rem;
+}
+.set-language.selected{
+    background-color: var(--secondary);
+    color: var(--primary);
 }
 /* 
 @media (min-height:1000px) {

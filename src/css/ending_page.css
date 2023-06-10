@@ -1,8 +1,4 @@
 .container-ending{
-    background-image: url(../assets/Wave\ Background\ complete.png);
-    background-size: cover;
-    background-position: center center;
-    overflow: hidden;
     width: 100vw;
     min-height: 100vh;
-  }
+}

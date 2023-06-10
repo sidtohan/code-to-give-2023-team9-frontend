@@ -13,7 +13,7 @@
   --font-small: 16px;
   --font-medium: 22px;
   --font-large: 26px;
-  --font-xl: 36px;
+  --font-xl: 30px;
   overflow-x: hidden;
 }
 body {
@@ -37,6 +37,7 @@ body {
     --font-small: 20px;
     --font-medium: 26px;
     --font-large: 30px;
+    --font-xl: 36px;
   }
 }
 @media (min-width: 768px) {
@@ -44,6 +45,7 @@ body {
       --font-small: 24px;
       --font-medium: 30px;
       --font-large: 40px;
+      --font-xl: 50px;
     }
 }
 

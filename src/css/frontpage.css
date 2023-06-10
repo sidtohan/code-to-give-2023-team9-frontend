@@ -210,7 +210,7 @@ nav ul {
 .heading{
     color: #fff;
     font-weight: 700;
-    font-size: 4rem;
+    font-size: var(--font-xl);
     text-align: center;
     padding: 0 2rem;
     padding-bottom: 4rem;
@@ -246,6 +246,7 @@ nav ul {
     display: flex;
     flex-direction: column;
     padding-bottom: 5rem;
+    padding-top: 4rem;
 }
 .testimonials > .heading{
     color: var(--primary);

@@ -1,7 +1,7 @@
 import "../css/Chat.css";
+import "../css/ChatHeader.css";
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import ChatHeader from "../components/ChatHeader";
 import ChatMessageHolder from "../components/ChatMessageHolder";
 import ChatForm from "../components/ChatForm";
 import { useNavigate } from "react-router-dom";
@@ -11,6 +11,7 @@ export default function Chat({ variants, language }) {
   // Page for Chat
   // States and Constants
   const navigate = useNavigate();
+  const [chatActive, setChatActive] = useState(false);
   const [messages, setMessages] = useState([
     {
       question: "Hello! Your responses will appear here.",
@@ -135,6 +136,13 @@ export default function Chat({ variants, language }) {
       // anything like loading etc
     };
   }, []);
+  const chatStyle =
+    chatActive === false
+      ? {
+          opacity: 0.5,
+        }
+      : {};
+  const formStyle = chatActive === false ? {} : { opacity: 0.5 };
   return (
     <motion.div
       className="chat"
@@ -147,8 +155,11 @@ export default function Chat({ variants, language }) {
         type: "spring",
       }}
     >
-      <ChatHeader />
-      <ChatMessageHolder messages={messages} ref={messageHolderRef} />
+      <ChatMessageHolder
+        style={chatStyle}
+        messages={messages}
+        ref={messageHolderRef}
+      />
       <ChatForm
         question={question}
         setQuestion={setQuestion}

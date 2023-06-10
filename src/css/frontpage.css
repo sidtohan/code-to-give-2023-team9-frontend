@@ -191,7 +191,7 @@ nav ul {
 }
 
 .wave-container{
-    width: 100vw;
+    width: 101vw;
     height: 20vw;
     z-index: -1;
     background: transparent;

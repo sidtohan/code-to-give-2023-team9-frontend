@@ -202,22 +202,29 @@ const DropDownOptions = ({
 }) => {
   const optionLimit = question.type === "multi-correct" ? 5 : 1;
   return (
-    <div className="drop-down">
-      {question.options.map((option, i) => {
-        return (
-          <DropDownButton
-            key={`dd${question.text[language]}${i}`}
-            option={option}
-            setAnswers={setAnswers}
-            setQuestion={setQuestion}
-            question={question}
-            language={language}
-            optionLimit={optionLimit}
-            answers={answers}
-          />
-        );
-      })}
-    </div>
+    <>
+      <h4 className="info">
+        {language === "english"
+          ? "Please scroll to select your option"
+          : "നിങ്ങളുടെ ഓപ്ഷൻ തിരഞ്ഞെടുക്കാൻ സ്ക്രോൾ ചെയ്യുക"}
+      </h4>
+      <div className="drop-down">
+        {question.options.map((option, i) => {
+          return (
+            <DropDownButton
+              key={`dd${question.text[language]}${i}`}
+              option={option}
+              setAnswers={setAnswers}
+              setQuestion={setQuestion}
+              question={question}
+              language={language}
+              optionLimit={optionLimit}
+              answers={answers}
+            />
+          );
+        })}
+      </div>
+    </>
   );
 };
 const RenderQuestion = ({
@@ -290,10 +297,10 @@ export default function ChatForm({
         <Loader />
       ) : (
         <>
-          <h2 className="form-heading">
-            {question ? question.text[language] : ""}
-          </h2>
           <form onSubmit={submitForm}>
+            <h2 className="form-heading">
+              {question ? question.text[language] : ""}
+            </h2>
             <RenderQuestion
               question={question}
               setQuestion={setQuestion}

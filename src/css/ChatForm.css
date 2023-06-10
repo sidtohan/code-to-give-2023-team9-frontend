@@ -7,6 +7,7 @@
     align-items: center;
     width: 100%;
     min-height: 60vh;
+    box-shadow: 0 -0.1rem 1rem grey;
 }
 .chat-form-bot{
     position: relative;
@@ -39,6 +40,7 @@
     width: 100%;
     font-size: var(--font-medium);
     overflow-wrap: break-word;
+    margin-bottom: 1rem;
 }
 .option-list{
     margin: 0 auto;
@@ -107,15 +109,20 @@
 }
 .drop-down{
     position: relative;
-    height: 4rem;
+    height: 9rem;
+    padding: 1rem;
+    width: 80%;
+    margin: 0 auto;
     overflow: scroll;
     display: flex;
     flex-direction: column;
+    border-radius: 1rem;
     gap: 1rem;
+    background-color: rgba(0,0,0,0.2);
 }
 .drop-down-button{
     display: block;
-    width: 80%;
+    width: 100%;
     min-height: 3rem;
     font-weight: 500;
     margin: 0 auto;
@@ -195,5 +202,15 @@ input[type="range"] {
   @media (max-height: 680px){
     .chat-form-bot > img{
         max-height: 11rem;
+    }
+  }
+  @media(min-width: 768px){
+    .chat-form{
+        flex-direction: row-reverse;
+    }
+    .chat-form > form{
+        height: 100%;
+        align-self: flex-start;
+        padding-top: 4rem;
     }
   }

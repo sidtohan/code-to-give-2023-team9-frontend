@@ -20,7 +20,6 @@ export default function Chat({ variants, language }) {
     nextLink: 1,
     isModifiable: false,
   });
-
   const [questionList, setQuestionList] = useState({
     1: question,
   });
@@ -37,7 +36,8 @@ export default function Chat({ variants, language }) {
     if (question.nextLink === null) {
       // Ends here
       (async () => {
-        await submitResponse(userInfo, "ZSPZlxOBzx7gFrcGlIwM");
+        const formID = localStorage.getItem("formID");
+        await submitResponse(userInfo, formID);
         endingPage();
       })();
     } else {
@@ -122,7 +122,8 @@ export default function Chat({ variants, language }) {
   useEffect(() => {
     (async () => {
       setLoading(true);
-      const { start, navigator } = await fetchQuestions("ZSPZlxOBzx7gFrcGlIwM");
+      const formID = localStorage.getItem("formID");
+      const { start, navigator } = await fetchQuestions(formID);
       setQuestionList(navigator);
       setQuestion(navigator[start]);
       setLoading(false);

@@ -11,7 +11,6 @@ body {
 }
 
 /* Navbar  Starts*/
-
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -112,12 +111,9 @@ nav ul {
     height: 100%;
     aspect-ratio: auto;
 }
-
-
 /* Navbar Ends */
 
 /* Body Starts */
-
 .container {
     display: flex;
     flex-direction: column;
@@ -180,6 +176,17 @@ nav ul {
 .chat-button:hover {
     background-color: #661515;
     color: white;
+}
+
+.volunteer{
+    background-color: var(--primary);
+    border: 1px solid var(--primary);
+    color: var(--secondary);
+    margin-top: 1rem;
+}
+.volunteer:hover{
+    background-color: var(--secondary);
+    color: var(--primary);
 }
 
 .description-container {

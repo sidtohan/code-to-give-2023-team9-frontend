@@ -5,6 +5,7 @@ import { AnimatePresence } from "framer-motion";
 import FrontPage from "./pages/FrontPage";
 import Chat from "./pages/Chat";
 import EndingPage from "./pages/EndingPage";
+import Redirection from "./pages/Redirection";
 
 function App() {
   const testimonials = [
@@ -56,9 +57,10 @@ function App() {
     <div className="app">
       <AnimatePresence mode="wait">
         <Routes key={location.pathname} location={location}>
+          <Route exact path="/form" element={<Redirection />} />
           <Route
             exact
-            path="/"
+            path="/starting"
             element={
               <FrontPage
                 variants={variants}

@@ -28,7 +28,7 @@ function ChatOption({
         // that is needed for the single correct question
         setQuestion({
           ...question,
-          nextLink: option.next ? option.next["_path"].segments[3] : null,
+          nextLink: option.next ? option.next : null,
         });
       }
     } else {
@@ -166,7 +166,7 @@ const DropDownButton = ({
         // that is needed for the single correct question
         setQuestion({
           ...question,
-          nextLink: option.next ? option.next["_path"].segments[3] : null,
+          nextLink: option.next ? option.next : null,
         });
       }
     } else {

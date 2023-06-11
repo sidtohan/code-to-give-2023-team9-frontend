@@ -14,7 +14,7 @@ export const fetchQuestions = async (formID) => {
       formID,
     },
   });
-  const start = quesList.data.startPath["_path"]["segments"][3];
+  const start = quesList.data.startPath;
   quesList = quesList.data.docs;
   // Generate hashmap for navigating next
   const navigator = {};
@@ -22,11 +22,10 @@ export const fetchQuestions = async (formID) => {
     if (!quesList[ques]["next"]) {
       quesList[ques].nextLink = null;
     } else if (quesList[ques].type !== "single-correct") {
-      quesList[ques].nextLink = quesList[ques]["next"]["_path"]["segments"][3];
+      quesList[ques].nextLink = quesList[ques]["next"];
     }
     navigator[quesList[ques].id] = quesList[ques];
   }
-  console.log(navigator);
   return { start, navigator };
 };
 

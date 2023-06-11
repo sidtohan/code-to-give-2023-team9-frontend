@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation, Autoplay } from "swiper";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import BotImage from "../assets/Bot.svg";
 import Language from "../assets/language.svg";
@@ -102,6 +102,7 @@ function TestimonialSlider({ testimonials, language }) {
 
 const menu = document.getElementById("#menu");
 function FrontPage({ variants, language, setLanguage, testimonials }) {
+  const newNav = useNavigate();
   const [isActive, setActive] = useState("false");
   const ToggleClass = () => {
     setActive(!isActive);
@@ -240,6 +241,28 @@ function FrontPage({ variants, language, setLanguage, testimonials }) {
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
             >
               {language === "english" ? "Let's chat" : "നമുക്ക് ചാറ്റ് ചെയ്യാം"}
+            </motion.div>
+          </Link>
+          <Link
+            to={"/chat"}
+            onClick={(e) => {
+              e.preventDefault();
+              const chatPage = () => newNav("/chat");
+              localStorage.setItem(
+                "formID",
+                localStorage.getItem("volunteerFormID")
+              );
+              chatPage();
+            }}
+            className="chat-button volunteer"
+          >
+            <motion.div
+              whileHover={{ scale: 1.1 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+            >
+              {language === "english"
+                ? "I wish to volunteer"
+                : "നമുക്ക് ചാറ്റ് ചെയ്യാം"}
             </motion.div>
           </Link>
           <LanguageButton setLanguage={setLanguage} language={language} />

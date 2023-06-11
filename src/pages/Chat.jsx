@@ -123,7 +123,6 @@ export default function Chat({ variants, language }) {
     (async () => {
       setLoading(true);
       const formID = localStorage.getItem("formID");
-      console.log(formID);
       const { start, navigator } = await fetchQuestions(formID);
       setQuestionList(navigator);
       setQuestion(navigator[start]);

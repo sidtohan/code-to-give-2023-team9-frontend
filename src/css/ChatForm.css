@@ -6,8 +6,10 @@
     justify-content: space-evenly;
     align-items: center;
     width: 100%;
+    max-width: 720px;
     min-height: 60vh;
     box-shadow: 0 -0.1rem 1rem grey;
+    margin: 0 auto;
 }
 .chat-form-bot{
     position: relative;
@@ -202,15 +204,5 @@ input[type="range"] {
   @media (max-height: 680px){
     .chat-form-bot > img{
         max-height: 11rem;
-    }
-  }
-  @media(min-width: 768px){
-    .chat-form{
-        flex-direction: row-reverse;
-    }
-    .chat-form > form{
-        height: 100%;
-        align-self: flex-start;
-        padding-top: 4rem;
     }
   }
